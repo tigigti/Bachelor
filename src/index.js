@@ -1,40 +1,19 @@
-import cytoscape from "cytoscape";
+import cy from "./cy";
 
-console.log("ai gude");
+const addNodeForm = document.getElementById("add-node-form");
+const nodeNameInput = document.getElementById("node-name-input");
 
-const cy = cytoscape({
-  container: document.getElementById("cy"),
+const addNode = name => {
+  cy.add({
+    group: "nodes",
+    data: { id: name }
+  });
 
-  elements: {
-    nodes: [
-      {
-        data: { id: "a" }
-      },
+  cy.layout({ name: "klay" }).run();
+};
 
-      {
-        data: { id: "b" }
-      },
-      { data: { id: "c" } }
-    ],
-    edges: [
-      {
-        data: { id: "ab", source: "a", target: "b" }
-      },
-      { data: { id: "bc", source: "b", target: "c" } }
-    ]
-  },
-  layout: {
-    name: "grid",
-    rows: 1
-  },
-
-  // so we can see the ids
-  style: [
-    {
-      selector: "node",
-      style: {
-        label: "data(id)"
-      }
-    }
-  ]
+addNodeForm.addEventListener("submit", e => {
+  e.preventDefault();
+  addNode(nodeNameInput.value);
+  nodeNameInput.value = "";
 });
