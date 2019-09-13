@@ -6,7 +6,7 @@ const nodeNameInput = document.getElementById("node-name-input");
 const addNode = name => {
   cy.add({
     group: "nodes",
-    data: { id: name }
+    data: { id: name, name: name }
   });
 
   cy.layout({ name: "klay" }).run();
