@@ -3,6 +3,9 @@ import klay from "cytoscape-klay";
 import edgehandles from "cytoscape-edgehandles";
 
 const metaInformationContainer = document.getElementById("meta-information-container");
+const changeNameBtn = document.getElementById("change-name-btn");
+
+let activeNode;
 
 cytoscape.use(klay);
 cytoscape.use(edgehandles);
@@ -109,15 +112,26 @@ const cy = cytoscape({
 // Display node metadata on click
 cy.on("tap", e => {
   const node = e.target.data();
+  activeNode = e.target;
+  let metaData = "";
   for (let data in node) {
     console.log(data, node[data]);
+    metaData += `
+      <p>${data}: ${node[data]}</p>
+    `;
   }
+  metaInformationContainer.innerHTML = metaData;
+  console.log(activeNode);
 });
 
 cy.edgehandles({
   complete: () => {
     cy.layout({ name: "klay" }).run();
   }
+});
+
+changeNameBtn.addEventListener("click", e => {
+  console.log("Clicked with active node: ", activeNode);
 });
 
 export default cy;

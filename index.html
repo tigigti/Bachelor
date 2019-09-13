@@ -8,13 +8,18 @@
     <title>Bachelor</title>
   </head>
   <body>
-    <h1>Headline</h1>
-    <form id="add-node-form" style="display: flex; flex-direction: row">
-      <input id="node-name-input" type="text" name="node-name" />
-      <button>Add</button>
-    </form>
-    <div id="meta-information-container" style="display: flex; flex-direction: column"></div>
-    <div id="cy"></div>
+    <div class="container">
+      <div class="ui">
+        <h1>Headline</h1>
+        <form id="add-node-form">
+          <input id="node-name-input" type="text" name="node-name" />
+          <button>Add</button>
+        </form>
+        <button id="change-name-btn">Change Name</button>
+        <div id="meta-information-container" style="display: flex; flex-direction: column"></div>
+      </div>
+      <div id="cy"></div>
+    </div>
 
     <script type="text/javascript" src="main.js"></script>
   </body>
