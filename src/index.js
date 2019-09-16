@@ -1,4 +1,4 @@
-import cy from "./cy";
+import cy, { layoutObject } from "./cy";
 
 const addNodeForm = document.getElementById("add-node-form");
 const nodeNameInput = document.getElementById("node-name-input");
@@ -9,7 +9,7 @@ const addNode = name => {
     data: { id: name, name: name }
   });
 
-  cy.layout({ name: "klay" }).run();
+  cy.layout(layoutObject).run();
 };
 
 addNodeForm.addEventListener("submit", e => {

@@ -3,14 +3,24 @@ import klay from "cytoscape-klay";
 import edgehandles from "cytoscape-edgehandles";
 
 const metaInformationContainer = document.getElementById("meta-information-container");
-const changeNameBtn = document.getElementById("change-name-btn");
+const changeMetaDataForm = document.getElementById("change-metadata-form");
+
+// Change Meta Data Form
+const changeNodeNameInput = document.getElementById("change-node-name-input");
+
+const deleteBtn = document.getElementById("delete-btn");
 
 let activeNode;
 
 cytoscape.use(klay);
 cytoscape.use(edgehandles);
 
-console.log("ai gude");
+export const layoutObject = {
+  name: "klay",
+  animate: true,
+  animationDuration: 200,
+  fit: true
+};
 
 const cy = cytoscape({
   container: document.getElementById("cy"),
@@ -43,7 +53,12 @@ const cy = cytoscape({
     {
       selector: "node[name]",
       style: {
-        content: "data(name)"
+        label: "data(name)",
+        width: "label",
+        height: "label",
+        shape: "rectangle",
+        "text-halign": "center",
+        "text-valign": "center"
       }
     },
     {
@@ -109,29 +124,43 @@ const cy = cytoscape({
   ]
 });
 
-// Display node metadata on click
-cy.on("tap", e => {
-  const node = e.target.data();
-  activeNode = e.target;
+// Render information to Sidebar
+const renderMetaData = () => {
+  const node = activeNode.data();
   let metaData = "";
   for (let data in node) {
-    console.log(data, node[data]);
     metaData += `
       <p>${data}: ${node[data]}</p>
     `;
   }
   metaInformationContainer.innerHTML = metaData;
-  console.log(activeNode);
-});
+};
 
+// Redraw Graph on Edge connection
 cy.edgehandles({
-  complete: () => {
-    cy.layout({ name: "klay" }).run();
+  stop: () => {
+    cy.layout(layoutObject).run();
   }
 });
 
-changeNameBtn.addEventListener("click", e => {
-  console.log("Clicked with active node: ", activeNode);
+// Display node metadata on click
+cy.on("tap", e => {
+  activeNode = e.target;
+  renderMetaData();
+});
+
+// Change Meta Information
+changeMetaDataForm.addEventListener("submit", e => {
+  e.preventDefault();
+  activeNode.data("name", changeNodeNameInput.value);
+  changeNodeNameInput.value = "";
+  renderMetaData();
+});
+
+deleteBtn.addEventListener("click", e => {
+  console.log("Delete this", activeNode);
+  cy.remove(activeNode);
+  metaInformationContainer.innerHTML = "";
 });
 
 export default cy;
