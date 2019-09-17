@@ -8,7 +8,10 @@ const changeMetaDataForm = document.getElementById("change-metadata-form");
 // Change Meta Data Form
 const changeNodeNameInput = document.getElementById("change-node-name-input");
 
+// Bind Buttons
 const deleteBtn = document.getElementById("delete-btn");
+const exportBtn = document.getElementById("export-btn");
+// const importBtn = document.getElementById("import-btn");
 
 const addNodeForm = document.getElementById("add-node-form");
 const nodeNameInput = document.getElementById("node-name-input");
@@ -81,22 +84,34 @@ const removeActive = () => {
 addNodeForm.addEventListener("submit", e => {
   e.preventDefault();
   const node = addNode(nodeNameInput.value);
-  console.log(node);
   state.setNode = node;
   nodeNameInput.value = "";
 });
 
 // Display node metadata on click
 cy.on("tap", e => {
-  state.setNode = e.target;
+  if (typeof e.target.group == "undefined") {
+    return;
+  }
+
+  // Don't display Edgehandle Metadata (is in nodes group)
+  if (e.target.classes()[0] == "eh-handle") {
+    return;
+  }
+
+  if (e.target.group() == "nodes" || e.target.group() == "edges") {
+    state.setNode = e.target;
+  }
 });
 
 // Redraw Graph on Edge connection
 cy.edgehandles({
   stop: sourceNode => {
     redraw(layoutObject);
+    // Set node as active when it's handler is clicked
     state.setNode = sourceNode;
-    console.log(sourceNode.data());
+    cy.filter("node").unselect();
+    state.getNode.select();
   }
 });
 
@@ -119,7 +134,22 @@ deleteBtn.addEventListener("click", e => {
 
 // By pressing delete key
 document.addEventListener("keydown", e => {
+  // console.log(e.keyCode);
   if (e.keyCode == 46 && state.getNode) {
     removeActive();
   }
 });
+
+// Export the graph
+exportBtn.addEventListener("click", e => {
+  // Exports the elements as flat array to be imported at a later state
+  console.log(cy.elements().jsons());
+});
+
+// Import elements into graph
+const importMyShit = elements => {
+  cy.json({
+    elements: elements
+  });
+  // Maybe redraw here
+};
