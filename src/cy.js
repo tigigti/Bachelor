@@ -1,16 +1,8 @@
+// Initialise Graph
+
 import cytoscape from "cytoscape";
 import klay from "cytoscape-klay";
 import edgehandles from "cytoscape-edgehandles";
-
-const metaInformationContainer = document.getElementById("meta-information-container");
-const changeMetaDataForm = document.getElementById("change-metadata-form");
-
-// Change Meta Data Form
-const changeNodeNameInput = document.getElementById("change-node-name-input");
-
-const deleteBtn = document.getElementById("delete-btn");
-
-let activeNode;
 
 cytoscape.use(klay);
 cytoscape.use(edgehandles);
@@ -58,7 +50,8 @@ const cy = cytoscape({
         height: "label",
         shape: "rectangle",
         "text-halign": "center",
-        "text-valign": "center"
+        "text-valign": "center",
+        padding: 4
       }
     },
     {
@@ -122,45 +115,6 @@ const cy = cytoscape({
       }
     }
   ]
-});
-
-// Render information to Sidebar
-const renderMetaData = () => {
-  const node = activeNode.data();
-  let metaData = "";
-  for (let data in node) {
-    metaData += `
-      <p>${data}: ${node[data]}</p>
-    `;
-  }
-  metaInformationContainer.innerHTML = metaData;
-};
-
-// Redraw Graph on Edge connection
-cy.edgehandles({
-  stop: () => {
-    cy.layout(layoutObject).run();
-  }
-});
-
-// Display node metadata on click
-cy.on("tap", e => {
-  activeNode = e.target;
-  renderMetaData();
-});
-
-// Change Meta Information
-changeMetaDataForm.addEventListener("submit", e => {
-  e.preventDefault();
-  activeNode.data("name", changeNodeNameInput.value);
-  changeNodeNameInput.value = "";
-  renderMetaData();
-});
-
-deleteBtn.addEventListener("click", e => {
-  console.log("Delete this", activeNode);
-  cy.remove(activeNode);
-  metaInformationContainer.innerHTML = "";
 });
 
 export default cy;
