@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
 .container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -11,12 +12,13 @@
 }
 
 .container .ui {
+  padding: 4px;
   width: 25%;
   position: relative;
   height: 100%;
   overflow-y: scroll;
-  padding: 4px;
-  background-color: lightgray;
+  background-color: #222629;
+  color: white;
 }
 
 .container #cy {
@@ -32,6 +34,65 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  margin-top: 8px;
+}
+
+.container .column-form .form-group {
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+button {
+  background-color: #86c232;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  padding: 4px 8px;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+button.btn-danger {
+  background-color: crimson;
+}
+
+button.btn-danger:hover {
+  background-color: #ad102f;
+}
+
+button.btn-danger:active {
+  background-color: crimson;
+}
+
+button.btn {
+  width: 100%;
+}
+
+button:hover {
+  background-color: #61892f;
+}
+
+button:active {
+  background-color: #86c232;
+}
+
+.horizontal-line {
+  width: 100%;
+  border-top: 1px solid #474b4f;
+}
+
+.space-top {
+  margin-top: 8px;
+}
+
+textarea,
+input {
+  border-radius: 8px;
+  max-width: 100%;
+  width: inherit;
+  resize: none;
+  padding: 4px;
+  border: none;
 }
 
 body {
@@ -39,12 +100,9 @@ body {
   margin: 0;
 }
 
-input {
-  max-width: 100%;
-}
-
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 /*# sourceMappingURL=style.css.map */

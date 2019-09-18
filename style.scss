@@ -1,15 +1,27 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
+
+$black: #222629;
+$grey: #474b4f;
+$lightgrey: #6b6e70;
+
+$accent: #61892f;
+$lightaccent: #86c232;
+
+$spacing: 8px;
+
 .container {
   display: flex;
   flex-direction: row;
   position: relative;
   height: 100vh;
   .ui {
+    padding: 4px;
     width: 25%;
     position: relative;
     height: 100%;
     overflow-y: scroll;
-    padding: 4px;
-    background-color: lightgray;
+    background-color: $black;
+    color: white;
   }
   #cy {
     width: 75%;
@@ -18,7 +30,58 @@
   .column-form {
     display: flex;
     flex-direction: column;
+    margin-top: $spacing;
+    .form-group {
+      margin-bottom: $spacing;
+      width: 100%;
+    }
   }
+}
+
+button {
+  background-color: $lightaccent;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  padding: 4px 8px;
+  transition: all 0.2s;
+  &.btn-danger {
+    background-color: crimson;
+    &:hover {
+      background-color: darken(crimson, 10%);
+    }
+    &:active {
+      background-color: crimson;
+    }
+  }
+  &.btn {
+    width: 100%;
+  }
+  &:hover {
+    background-color: $accent;
+  }
+  &:active {
+    background-color: $lightaccent;
+  }
+}
+
+.horizontal-line {
+  width: 100%;
+  border-top: 1px solid $grey;
+}
+
+.space-top {
+  margin-top: $spacing;
+}
+
+textarea,
+input {
+  border-radius: 8px;
+  max-width: 100%;
+  width: inherit;
+  resize: none;
+  padding: 4px;
+  border: none;
 }
 
 body {
@@ -26,9 +89,7 @@ body {
   margin: 0;
 }
 
-input {
-  max-width: 100%;
-}
 * {
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }

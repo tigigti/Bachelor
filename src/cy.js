@@ -1,11 +1,11 @@
 // Initialise Graph
 
 import cytoscape from "cytoscape";
-import klay from "cytoscape-klay";
+// import klay from "cytoscape-klay";
 import edgehandles from "cytoscape-edgehandles";
 import dagre from "cytoscape-dagre";
 
-cytoscape.use(klay);
+// cytoscape.use(klay);
 cytoscape.use(dagre);
 cytoscape.use(edgehandles);
 
@@ -23,14 +23,26 @@ const cy = cytoscape({
   elements: {
     nodes: [
       {
-        data: { id: "a", startDate: "2000-11-27", endDate: "2020-01-07", name: "get a degree" }
+        data: {
+          id: "a",
+          startDate: "2000-11-27",
+          endDate: "2020-01-07",
+          name: "get a degree",
+          desc: "Yeah i kinda need it my guy"
+        }
       },
 
       {
-        data: { id: "b", name: "make your fam proud", startDate: "2000-01-01", endDate: "2021-10-31" }
+        data: {
+          id: "b",
+          name: "make your fam proud",
+          startDate: "2000-01-01",
+          endDate: "2021-10-31",
+          desc: "Ride or die for my mf Fam"
+        }
       },
-      { data: { id: "c", name: "c", startDate: "2000-01-01", endDate: "2021-10-31" } },
-      { data: { id: "d", name: "d", startDate: "2000-01-01", endDate: "2021-10-31" } }
+      { data: { id: "c", name: "c", startDate: "2000-01-01", endDate: "2021-10-31", desc: "Hola amigo" } },
+      { data: { id: "d", name: "d", startDate: "2000-01-01", endDate: "2021-10-31", desc: "Bogdaaan" } }
     ],
     edges: [
       {
@@ -40,9 +52,7 @@ const cy = cytoscape({
       { data: { id: "ad", source: "d", target: "c" } }
     ]
   },
-  // layout: {
-  //   name: "klay"
-  // },
+  layout: layoutObject,
 
   style: [
     {
@@ -55,6 +65,8 @@ const cy = cytoscape({
         "text-halign": "center",
         "text-valign": "center",
         padding: 4
+        // "background-color": "#86c232",
+        // color: "white"
       }
     },
     {
@@ -64,11 +76,21 @@ const cy = cytoscape({
         "target-arrow-shape": "triangle"
       }
     },
+    {
+      selector: ":selected",
+      style: {
+        "background-color": "#86c232",
+        color: "white",
+        "line-color": "#86c232",
+        "target-arrow-color": "#86c232",
+        "source-arrow-color": "#86c232"
+      }
+    },
 
     {
       selector: ".eh-handle",
       style: {
-        "background-color": "red",
+        "background-color": "#61892f",
         width: 9,
         height: 9,
         shape: "ellipse",
@@ -81,7 +103,7 @@ const cy = cytoscape({
     {
       selector: ".eh-hover",
       style: {
-        "background-color": "red"
+        "background-color": "#61892f"
       }
     },
 
@@ -89,7 +111,7 @@ const cy = cytoscape({
       selector: ".eh-source",
       style: {
         "border-width": 1,
-        "border-color": "red"
+        "border-color": "#61892f"
       }
     },
 
@@ -97,17 +119,18 @@ const cy = cytoscape({
       selector: ".eh-target",
       style: {
         "border-width": 1,
-        "border-color": "red"
+        "border-color": "#61892f"
       }
     },
 
     {
       selector: ".eh-preview, .eh-ghost-edge",
       style: {
-        "background-color": "red",
-        "line-color": "red",
-        "target-arrow-color": "red",
-        "source-arrow-color": "red"
+        "background-color": "#61892f",
+        "line-color": "#61892f",
+        "target-arrow-color": "#61892f",
+        "source-arrow-color": "#61892f",
+        color: "white"
       }
     },
 
@@ -119,7 +142,5 @@ const cy = cytoscape({
     }
   ]
 });
-
-cy.layout(layoutObject).run();
 
 export default cy;
