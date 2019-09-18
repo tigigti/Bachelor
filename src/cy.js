@@ -3,15 +3,18 @@
 import cytoscape from "cytoscape";
 import klay from "cytoscape-klay";
 import edgehandles from "cytoscape-edgehandles";
+import dagre from "cytoscape-dagre";
 
 cytoscape.use(klay);
+cytoscape.use(dagre);
 cytoscape.use(edgehandles);
 
 export const layoutObject = {
-  name: "klay",
+  name: "dagre",
   animate: true,
   animationDuration: 200,
-  fit: true
+  fit: true,
+  borderSpacing: 5
 };
 
 const cy = cytoscape({
@@ -20,26 +23,26 @@ const cy = cytoscape({
   elements: {
     nodes: [
       {
-        data: { id: "a", age: 12, time: "12 hours", name: "a" }
+        data: { id: "a", startDate: "2000-11-27", endDate: "2020-01-07", name: "get a degree" }
       },
 
       {
-        data: { id: "b", name: "b" }
+        data: { id: "b", name: "make your fam proud", startDate: "2000-01-01", endDate: "2021-10-31" }
       },
-      { data: { id: "c", name: "c" } },
-      { data: { id: "d", name: "d" } }
+      { data: { id: "c", name: "c", startDate: "2000-01-01", endDate: "2021-10-31" } },
+      { data: { id: "d", name: "d", startDate: "2000-01-01", endDate: "2021-10-31" } }
     ],
     edges: [
       {
         data: { id: "ab", source: "a", target: "b" }
       },
       { data: { id: "bc", source: "b", target: "c" } },
-      { data: { id: "dc", source: "d", target: "c" } }
+      { data: { id: "ad", source: "d", target: "c" } }
     ]
   },
-  layout: {
-    name: "klay"
-  },
+  // layout: {
+  //   name: "klay"
+  // },
 
   style: [
     {
@@ -66,8 +69,8 @@ const cy = cytoscape({
       selector: ".eh-handle",
       style: {
         "background-color": "red",
-        width: 6,
-        height: 6,
+        width: 9,
+        height: 9,
         shape: "ellipse",
         "overlay-opacity": 0,
         "border-width": 6, // makes the handle easier to hit
@@ -116,5 +119,7 @@ const cy = cytoscape({
     }
   ]
 });
+
+cy.layout(layoutObject).run();
 
 export default cy;

@@ -7,6 +7,8 @@ const changeMetaDataForm = document.getElementById("change-metadata-form");
 
 // Change Meta Data Form
 const changeNodeNameInput = document.getElementById("change-node-name-input");
+const changeNodeStartDate = document.getElementById("change-node-start-date");
+const changeNodeEndDate = document.getElementById("change-node-end-date");
 
 // Bind Buttons
 const deleteBtn = document.getElementById("delete-btn");
@@ -22,11 +24,12 @@ const state = {
   activeNode: null,
   activeNodeListener: value => {
     // Toggle display of meta information
-    if (value == null) {
+    if (value == null || value.group() == "edges") {
       changeMetaDataForm.style.display = "none";
+      metaInformationContainer.innerHTML = "";
       return;
     }
-    changeMetaDataForm.style.display = "block";
+    changeMetaDataForm.style.display = "flex";
     renderMetaData();
   },
   get getNode() {
@@ -56,14 +59,19 @@ const renderMetaData = () => {
       <div>${data}: ${node[data]}</div>
     `;
   }
+
+  changeNodeNameInput.value = node.name;
+  changeNodeStartDate.value = node.startDate;
+  changeNodeEndDate.value = node.endDate;
   metaInformationContainer.innerHTML = metaData;
 };
 
 // Add new node
 const addNode = name => {
+  const now = new Date().toISOString().slice(0, 10);
   const node = cy.add({
     group: "nodes",
-    data: { id: name, name: name }
+    data: { id: name, name: name, startDate: now, endDate: now }
   });
 
   redraw(layoutObject);
@@ -73,7 +81,6 @@ const addNode = name => {
 // Clear the active node
 const removeActive = () => {
   cy.remove(state.getNode);
-  metaInformationContainer.innerHTML = "";
   redraw(layoutObject);
   state.setNode = null;
 };
@@ -119,7 +126,8 @@ cy.edgehandles({
 changeMetaDataForm.addEventListener("submit", e => {
   e.preventDefault();
   state.getNode.data("name", changeNodeNameInput.value);
-  changeNodeNameInput.value = "";
+  state.getNode.data("startDate", changeNodeStartDate.value);
+  state.getNode.data("endDate", changeNodeEndDate.value);
   renderMetaData();
   redraw(layoutObject);
 });

@@ -15,10 +15,20 @@
           <input id="node-name-input" type="text" name="node-name" />
           <button>Add</button>
         </form>
-        <form id="change-metadata-form" style="display: none">
-          <input id="change-node-name-input" type="text" name="change-node-name" />
-          <button>Change Name</button>
+
+        <form class="column-form" id="change-metadata-form" style="display: none">
+          <label for="change-node-name-input">Name</label>
+          <input id="change-node-name-input" type="text" name="change-node-name-input" />
+
+          <label for="change-node-start-date">Start Date</label>
+          <input id="change-node-start-date" type="date" name="change-node-start-date" />
+
+          <label for="change-node-end-date">End Date</label>
+          <input id="change-node-end-date" type="date" name="change-node-end-date" />
+
+          <button>Update</button>
         </form>
+
         <div id="meta-information-container" style="display: flex; flex-direction: column"></div>
         <button id="delete-btn" style="background-color: crimson">Delete</button>
         <button id="export-btn">Export</button>
