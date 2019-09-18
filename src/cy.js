@@ -53,6 +53,8 @@ const cy = cytoscape({
     ]
   },
   layout: layoutObject,
+  // userZoomingEnabled: false,
+  // userPanningEnabled: false,
 
   style: [
     {

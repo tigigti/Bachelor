@@ -91,10 +91,19 @@ const addNode = name => {
   return node;
 };
 
-// Clear the active node
+// delete the active node
 const removeActive = () => {
+  if (!state.getNode) {
+    return;
+  }
   cy.remove(state.getNode);
   redraw(layoutObject);
+  state.setNode = null;
+};
+
+// Reset Selection
+const unselectActive = () => {
+  cy.filter().unselect();
   state.setNode = null;
 };
 
@@ -184,4 +193,14 @@ const importMyShit = elements => {
     elements: elements
   });
   // Maybe redraw here
+};
+
+document.onkeydown = e => {
+  if (e.ctrlKey && e.keyCode == 46) {
+    return removeActive();
+  }
+
+  if (/*e.ctrlKey && */ e.keyCode == 27) {
+    return unselectActive();
+  }
 };
