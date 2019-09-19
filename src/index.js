@@ -1,6 +1,7 @@
 // DOM Binding
 
 import cy, { layoutObject, styleArray } from "./cy";
+// import "./events";
 
 const metaInformationContainer = document.getElementById("meta-information-container");
 const changeMetaDataForm = document.getElementById("change-metadata-form");
@@ -28,7 +29,7 @@ let testImports;
 
 // ======= State =======
 
-const state = {
+export const state = {
     activeNode: null,
     activeNodeListener: value => {
         // Toggle display of meta information
@@ -59,7 +60,7 @@ const state = {
 
 // ======= Functions =======
 
-const redraw = layoutObject => {
+const redraw = () => {
     cy.layout(layoutObject).run();
 };
 
@@ -92,7 +93,7 @@ const addNode = name => {
         data: { id: name, name: name, startDate: now, endDate: now, desc: "" }
     });
 
-    redraw(layoutObject);
+    redraw();
     return node;
 };
 
@@ -102,7 +103,7 @@ const removeActive = () => {
         return;
     }
     cy.remove(state.getNode);
-    redraw(layoutObject);
+    redraw();
     deletedNodes.push(state.getNode);
     state.setNode = null;
 };
@@ -121,7 +122,7 @@ const updateActiveNode = () => {
     state.getNode.data("desc", changeNodeDesc.value);
 
     renderMetaData();
-    redraw(layoutObject);
+    redraw();
 };
 
 // ======= Event Listener =======
@@ -161,7 +162,7 @@ cy.on("tap", e => {
 // Redraw Graph on Edge connection
 cy.edgehandles({
     stop: sourceNode => {
-        redraw(layoutObject);
+        redraw();
         // Set node as active when it's handler is clicked
         state.setNode = sourceNode;
         cy.filter("node").unselect();
@@ -195,8 +196,12 @@ deleteBtn.addEventListener("click", e => {
 // Export the graph
 exportBtn.addEventListener("click", e => {
     // Exports the elements as flat array to be imported at a later state
-    console.log(cy.elements().jsons());
-    testImports = cy.elements().jsons();
+    // Exclude the edgehandler from being exported as a node
+    const exportedEles = cy.elements().filter((ele, i, eles) => {
+        return ele.classes()[0] != "eh-handle";
+    });
+    console.log(exportedEles);
+    testImports = exportedEles.jsons();
 });
 
 // Import elements into graph
@@ -206,7 +211,8 @@ importBtn.addEventListener("click", e => {
         style: styleArray,
         elements: testImports
     });
-    redraw(layoutObject);
+    redraw();
+    unselectActive();
 });
 
 // TODO: Add Buttons for mobile version
@@ -228,14 +234,13 @@ document.onkeydown = e => {
         const restoredNode = deletedNodes.pop();
         restoredNode.restore();
         cy.elements(restoredNode).unselect();
-        redraw(layoutObject);
+        redraw();
         return;
     }
 };
 
 // Start new Roadmap
 newRoadmapBtn.addEventListener("click", e => {
-    console.log("pop up");
     if (!window.confirm("Start a new Roadmap? Current one will be deleted!")) {
         return;
     }
