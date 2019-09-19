@@ -12,7 +12,7 @@
 }
 
 .container .ui {
-  padding: 4px;
+  padding: 10px 8px;
   width: 25%;
   position: relative;
   height: 100%;
@@ -40,6 +40,26 @@
 .container .column-form .form-group {
   margin-bottom: 8px;
   width: 100%;
+}
+
+@media screen and (max-width: 576px) {
+  .container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+  }
+  .container .ui,
+  .container #cy {
+    width: 100%;
+  }
+  .container .ui {
+    height: 40%;
+    padding: 0 8px;
+  }
+  .container #cy {
+    height: 60%;
+  }
 }
 
 button {
@@ -78,7 +98,15 @@ button:active {
 
 .horizontal-line {
   width: 100%;
-  border-top: 1px solid #474b4f;
+  border-top: 2px solid #474b4f;
+}
+
+.horizontal-line.space-top {
+  margin-top: 24px;
+}
+
+.horizontal-line.space-bot {
+  margin-bottom: 24px;
 }
 
 .space-top {
@@ -93,6 +121,12 @@ input {
   resize: none;
   padding: 4px;
   border: none;
+}
+
+button,
+textarea,
+input {
+  outline: none;
 }
 
 body {

@@ -1,62 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Bachelor</title>
-  </head>
-  <body>
-    <div class="container">
-      <div class="ui">
-        <h1>Headline</h1>
-        <form id="add-node-form">
-          <input autocomplete="off" id="node-name-input" type="text" name="node-name" placeholder="New Goal" />
-          <button class="btn space-top" style="display: none">Add Goal</button>
-        </form>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Bachelor</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="ui">
+                <h1>Headline</h1>
+                <form id="add-node-form">
+                    <input
+                        autocomplete="off"
+                        id="node-name-input"
+                        type="text"
+                        name="node-name"
+                        placeholder="New Goal"
+                        style="width: 100%;"
+                    />
+                    <button class="btn space-top" style="display: none">Add Goal</button>
+                </form>
 
-        <form class="column-form" id="change-metadata-form" style="display: none">
-          <div class="horizontal-line"></div>
-          <div class="form-group">
-            <label for="change-node-name-input">Name</label>
-            <input id="change-node-name-input" type="text" name="change-node-name-input" />
-          </div>
+                <form class="column-form" id="change-metadata-form" style="display: none">
+                    <div class="horizontal-line space-bot space-top"></div>
+                    <div class="form-group">
+                        <label for="change-node-name-input">Name</label>
+                        <input id="change-node-name-input" type="text" name="change-node-name-input" />
+                    </div>
 
-          <div class="form-group">
-            <label for="change-node-start-date">Start Date</label>
-            <input id="change-node-start-date" type="date" name="change-node-start-date" />
-          </div>
+                    <div class="form-group">
+                        <label for="change-node-start-date">Start Date</label>
+                        <input id="change-node-start-date" type="date" name="change-node-start-date" />
+                    </div>
 
-          <div class="form-group">
-            <label for="change-node-end-date">End Date</label>
-            <input id="change-node-end-date" type="date" name="change-node-end-date" />
-          </div>
+                    <div class="form-group">
+                        <label for="change-node-end-date">End Date</label>
+                        <input id="change-node-end-date" type="date" name="change-node-end-date" />
+                    </div>
 
-          <div class="form-group">
-            <label for="change-node-description">Description</label>
-            <textarea
-              placeholder="Describe your goal..."
-              id="change-node-description"
-              name="change-node-description"
-              rows="5"
-            ></textarea>
-          </div>
-          <button>Update</button>
-        </form>
+                    <div class="form-group">
+                        <label for="change-node-description">Description</label>
+                        <textarea
+                            placeholder="Describe your goal..."
+                            id="change-node-description"
+                            name="change-node-description"
+                            rows="5"
+                        ></textarea>
+                    </div>
+                    <button>Update</button>
+                </form>
 
-        <div id="meta-information-container" style="display: flex; flex-direction: column"></div>
-        <button id="delete-btn" class="btn btn-danger space-top" style="display: none;">Delete</button>
-        <div class="horizontal-line space-top"></div>
-        <button id="export-btn" class="btn space-top">Export</button>
-        <button id="import-btn" class="btn space-top">Import</button>
-        <!-- <label for="import-btn">Import</label> -->
-        <!-- <input type="file" id="import-btn" name="import-btn" /> -->
-        <div class="white-space" style="height: 20px"></div>
-      </div>
-      <div id="cy"></div>
-    </div>
+                <div id="meta-information-container" style="display: flex; flex-direction: column"></div>
+                <button id="delete-btn" class="btn btn-danger space-top" style="display: none;">Delete</button>
+                <div class="horizontal-line space-top space-bot"></div>
+                <button id="new-roadmap-btn" class="btn">New Roadmap</button>
+                <button id="export-btn" class="btn space-top">Export</button>
+                <button id="import-btn" class="btn space-top">Import</button>
+                <!-- <label for="import-btn">Import</label> -->
+                <!-- <input type="file" id="import-btn" name="import-btn" /> -->
+                <div class="white-space" style="height: 20px"></div>
+            </div>
+            <div id="cy"></div>
+        </div>
 
-    <script type="text/javascript" src="main.js"></script>
-  </body>
+        <script type="text/javascript" src="main.js"></script>
+    </body>
 </html>

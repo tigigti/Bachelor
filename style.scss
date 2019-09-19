@@ -10,86 +10,113 @@ $lightaccent: #86c232;
 $spacing: 8px;
 
 .container {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  height: 100vh;
-  .ui {
-    padding: 4px;
-    width: 25%;
-    position: relative;
-    height: 100%;
-    overflow-y: scroll;
-    background-color: $black;
-    color: white;
-  }
-  #cy {
-    width: 75%;
-    height: 100%;
-  }
-  .column-form {
     display: flex;
-    flex-direction: column;
-    margin-top: $spacing;
-    .form-group {
-      margin-bottom: $spacing;
-      width: 100%;
+    flex-direction: row;
+    position: relative;
+    height: 100vh;
+    .ui {
+        padding: 10px 8px;
+        width: 25%;
+        position: relative;
+        height: 100%;
+        overflow-y: scroll;
+        background-color: $black;
+        color: white;
     }
-  }
+    #cy {
+        width: 75%;
+        height: 100%;
+    }
+    .column-form {
+        display: flex;
+        flex-direction: column;
+        margin-top: $spacing;
+        .form-group {
+            margin-bottom: $spacing;
+            width: 100%;
+        }
+    }
+
+    // Responsive styles
+    @media screen and (max-width: 576px) {
+        flex-direction: column-reverse;
+        .ui,
+        #cy {
+            width: 100%;
+        }
+        .ui {
+            height: 40%;
+            padding: 0 8px;
+        }
+        #cy {
+            height: 60%;
+        }
+    }
 }
 
 button {
-  background-color: $lightaccent;
-  border-radius: 8px;
-  border: none;
-  color: white;
-  padding: 4px 8px;
-  transition: all 0.2s;
-  &.btn-danger {
-    background-color: crimson;
+    background-color: $lightaccent;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    padding: 4px 8px;
+    transition: all 0.2s;
+    &.btn-danger {
+        background-color: crimson;
+        &:hover {
+            background-color: darken(crimson, 10%);
+        }
+        &:active {
+            background-color: crimson;
+        }
+    }
+    &.btn {
+        width: 100%;
+    }
     &:hover {
-      background-color: darken(crimson, 10%);
+        background-color: $accent;
     }
     &:active {
-      background-color: crimson;
+        background-color: $lightaccent;
     }
-  }
-  &.btn {
-    width: 100%;
-  }
-  &:hover {
-    background-color: $accent;
-  }
-  &:active {
-    background-color: $lightaccent;
-  }
 }
 
 .horizontal-line {
-  width: 100%;
-  border-top: 1px solid $grey;
+    width: 100%;
+    border-top: 2px solid $grey;
+    &.space-top {
+        margin-top: 3 * $spacing;
+    }
+    &.space-bot {
+        margin-bottom: 3 * $spacing;
+    }
 }
 
 .space-top {
-  margin-top: $spacing;
+    margin-top: $spacing;
 }
 
 textarea,
 input {
-  border-radius: 8px;
-  max-width: 100%;
-  width: inherit;
-  resize: none;
-  padding: 4px;
-  border: none;
+    border-radius: 8px;
+    max-width: 100%;
+    width: inherit;
+    resize: none;
+    padding: 4px;
+    border: none;
+}
+button,
+textarea,
+input {
+    outline: none;
 }
 
 body {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
 * {
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
