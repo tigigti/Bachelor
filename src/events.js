@@ -26,7 +26,7 @@ export const changeNodeDesc = document.getElementById("change-node-description")
 
 // Goal Checkboxes
 const addCheckboxBtn = document.querySelector(".add-checkbox");
-const checkboxContainer = document.querySelector(".checkbox-container");
+export const checkboxContainer = document.querySelector(".checkbox-container");
 
 // Bind Buttons
 export const deleteBtn = document.getElementById("delete-btn");
@@ -188,7 +188,11 @@ uiToggler.addEventListener("click", e => {
 
 // Add new checkbox goal
 addCheckboxBtn.addEventListener("click", e => {
-    const numberChecks = checkboxContainer.querySelectorAll("input").length;
+    e.preventDefault();
+    if (checkboxContainer.children.length == 0) {
+        return checkboxContainer.appendChild(newCheckboxGoal(1, "ai servus"));
+    }
+    const numberChecks = parseInt(checkboxContainer.lastElementChild.dataset.goalId);
     const domElement = newCheckboxGoal(numberChecks + 1, "hey hey");
     console.log(domElement);
     checkboxContainer.appendChild(domElement);
@@ -198,6 +202,6 @@ addCheckboxBtn.addEventListener("click", e => {
 checkboxContainer.addEventListener("click", e => {
     if (e.target && e.target.classList.contains("remove-goal")) {
         const goalId = e.target.dataset.goalId;
-        checkboxContainer.removeChild(document.querySelector("#"));
+        checkboxContainer.removeChild(document.querySelector(`#checkbox-row${goalId}`));
     }
 });

@@ -1,6 +1,12 @@
 import cy, { layoutObject, styleArray } from "./cy";
 import { state } from "./index";
-import { changeNodeNameInput, changeNodeStartDate, changeNodeEndDate, changeNodeDesc } from "./events";
+import {
+    changeNodeNameInput,
+    changeNodeStartDate,
+    changeNodeEndDate,
+    changeNodeDesc,
+    checkboxContainer
+} from "./events";
 
 export let deletedNodes = [];
 
@@ -39,6 +45,14 @@ export const renderMetaData = () => {
     changeNodeEndDate.value = node.endDate;
     changeNodeDesc.value = node.desc;
 
+    checkboxContainer.innerHTML = "";
+    if (!node.goalsList) {
+        return;
+    }
+    for (let i = 0; i < node.goalsList.length; i++) {
+        checkboxContainer.appendChild(newCheckboxGoal(node.goalsList[i].id, "hello there", node.goalsList[i].done));
+    }
+
     // metaInformationContainer.innerHTML = metaData;
 };
 
@@ -48,6 +62,19 @@ export const updateActiveNode = () => {
     state.getNode.data("startDate", changeNodeStartDate.value);
     state.getNode.data("endDate", changeNodeEndDate.value);
     state.getNode.data("desc", changeNodeDesc.value);
+
+    // Extract data from checkbox container
+    let goalsList = [];
+    const goalsListElements = checkboxContainer.querySelectorAll("div[id^='check']");
+    goalsListElements.forEach(goalElement => {
+        goalsList.push({
+            id: goalElement.dataset.goalId,
+            done: goalElement.querySelector("input[type='checkbox']").checked
+        });
+    });
+    console.log(goalsList);
+
+    state.getNode.data("goalsList", goalsList);
 
     renderMetaData();
     redraw();
@@ -79,16 +106,14 @@ export const startNewRoadmap = () => {
     });
 };
 
-export const newCheckboxGoal = (number, name) => {
+export const newCheckboxGoal = (number, name, checked = false) => {
     const id = `goal-checkbox${number}`;
-    //   return `
-    //   <input type="checkbox" id="${id}" name="${id}"/> ${name} <br/>
-    // `;
 
     const checkBox = document.createElement("input");
     checkBox.setAttribute("type", "checkbox");
     checkBox.setAttribute("id", id);
     checkBox.setAttribute("name", id);
+    checkBox.checked = checked;
 
     const deleteGoal = document.createElement("button");
     deleteGoal.setAttribute("class", "remove-goal btn-flat");
@@ -96,6 +121,8 @@ export const newCheckboxGoal = (number, name) => {
     deleteGoal.appendChild(document.createTextNode("X"));
 
     const checkBoxDiv = document.createElement("div");
+    checkBoxDiv.setAttribute("id", `checkbox-row${number}`);
+    checkBoxDiv.setAttribute("data-goal-id", number);
     checkBoxDiv.appendChild(checkBox);
     checkBoxDiv.appendChild(document.createTextNode(name));
     checkBoxDiv.appendChild(deleteGoal);
