@@ -50,7 +50,9 @@ export const renderMetaData = () => {
         return;
     }
     for (let i = 0; i < node.goalsList.length; i++) {
-        checkboxContainer.appendChild(newCheckboxGoal(node.goalsList[i].id, "hello there", node.goalsList[i].done));
+        checkboxContainer.appendChild(
+            newCheckboxGoal(node.goalsList[i].id, node.goalsList[i].name, node.goalsList[i].done)
+        );
     }
 
     // metaInformationContainer.innerHTML = metaData;
@@ -69,6 +71,7 @@ export const updateActiveNode = () => {
     goalsListElements.forEach(goalElement => {
         goalsList.push({
             id: goalElement.dataset.goalId,
+            name: goalElement.querySelector("input[type='text']").value,
             done: goalElement.querySelector("input[type='checkbox']").checked
         });
     });
@@ -106,7 +109,7 @@ export const startNewRoadmap = () => {
     });
 };
 
-export const newCheckboxGoal = (number, name, checked = false) => {
+export const newCheckboxGoal = (number, name = "", checked = false) => {
     const id = `goal-checkbox${number}`;
 
     const checkBox = document.createElement("input");
@@ -114,6 +117,12 @@ export const newCheckboxGoal = (number, name, checked = false) => {
     checkBox.setAttribute("id", id);
     checkBox.setAttribute("name", id);
     checkBox.checked = checked;
+
+    const goalName = document.createElement("input");
+    goalName.setAttribute("type", "text");
+    goalName.setAttribute("class", "input-flat");
+    goalName.setAttribute("placeholder", "name...");
+    goalName.value = name;
 
     const deleteGoal = document.createElement("button");
     deleteGoal.setAttribute("class", "remove-goal btn-flat");
@@ -124,7 +133,8 @@ export const newCheckboxGoal = (number, name, checked = false) => {
     checkBoxDiv.setAttribute("id", `checkbox-row${number}`);
     checkBoxDiv.setAttribute("data-goal-id", number);
     checkBoxDiv.appendChild(checkBox);
-    checkBoxDiv.appendChild(document.createTextNode(name));
+    // checkBoxDiv.appendChild(document.createTextNode(name));
+    checkBoxDiv.appendChild(goalName);
     checkBoxDiv.appendChild(deleteGoal);
 
     return checkBoxDiv;

@@ -135,19 +135,19 @@ button {
     text-transform: uppercase;
     letter-spacing: 0.15em;
     &.btn-flat {
-      padding: 0 2px;
-      border-radius: 0;
-      letter-spacing: normal;
-      background-color: transparent;
-      color: $lightgrey;
-      &:hover {
-        background-color: transparent;
-        color: crimson;
-      }
-      &:active {
+        padding: 0 2px;
+        border-radius: 0;
+        letter-spacing: normal;
         background-color: transparent;
         color: $lightgrey;
-      }
+        &:hover {
+            background-color: transparent;
+            color: crimson;
+        }
+        &:active {
+            background-color: transparent;
+            color: $lightgrey;
+        }
     }
     &.btn-danger {
         background-color: crimson;
@@ -223,6 +223,12 @@ input {
     border: none;
     &[type="checkbox"] {
         width: auto;
+    }
+    &[type="text"].input-flat {
+        background-color: transparent;
+        border-radius: 0;
+        padding: 0;
+        color: white;
     }
 }
 button,

@@ -190,10 +190,10 @@ uiToggler.addEventListener("click", e => {
 addCheckboxBtn.addEventListener("click", e => {
     e.preventDefault();
     if (checkboxContainer.children.length == 0) {
-        return checkboxContainer.appendChild(newCheckboxGoal(1, "ai servus"));
+        return checkboxContainer.appendChild(newCheckboxGoal(1));
     }
     const numberChecks = parseInt(checkboxContainer.lastElementChild.dataset.goalId);
-    const domElement = newCheckboxGoal(numberChecks + 1, "hey hey");
+    const domElement = newCheckboxGoal(numberChecks + 1);
     console.log(domElement);
     checkboxContainer.appendChild(domElement);
 });
