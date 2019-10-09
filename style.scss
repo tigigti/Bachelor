@@ -10,160 +10,206 @@ $lightaccent: #86c232;
 $spacing: 8px;
 
 .container {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  height: 100vh;
+  .ui {
+    padding: 10px 8px;
+    width: 25%;
     position: relative;
-    height: 100vh;
+    height: 100%;
+    overflow-y: scroll;
+    background-color: $black;
+    color: white;
+    transition: all 0.2s;
+    &.minimized {
+      padding: 10px 1px;
+      width: 5%;
+      min-width: 30px;
+      * {
+        display: none;
+      }
+      #delete-btn {
+        display: none !important;
+      }
+      .toggler,
+      .bar {
+        display: block;
+      }
+    }
+    .toggler {
+      float: right;
+      .bar {
+        height: 4px;
+        background-color: white;
+        width: 28px;
+        margin-bottom: 3px;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  .ui.minimized + #cy {
+    width: 95%;
+  }
+  #cy {
+    width: 75%;
+    height: 100%;
+  }
+
+  // Responsive styles
+  @media screen and (max-width: 576px) {
+    flex-direction: column-reverse;
+    .ui,
+    #cy {
+      width: 100%;
+    }
     .ui {
-        padding: 10px 8px;
-        width: 25%;
-        position: relative;
-        height: 100%;
-        overflow-y: scroll;
-        background-color: $black;
-        color: white;
+      height: 40%;
+      padding: 0 8px;
+      &.minimized {
+        height: 10%;
+        min-height: 26px;
+        width: 100%;
+        + #cy {
+          height: 90%;
+          width: 100%;
+        }
+      }
+      .toggler {
+        position: absolute;
+        top: 4px;
+        right: 8px;
+      }
     }
     #cy {
-        width: 75%;
-        height: 100%;
+      height: 60%;
     }
-
-    // Responsive styles
-    @media screen and (max-width: 576px) {
-        flex-direction: column-reverse;
-        .ui,
-        #cy {
-            width: 100%;
-        }
-        .ui {
-            height: 40%;
-            padding: 0 8px;
-        }
-        #cy {
-            height: 60%;
-        }
-    }
+  }
 }
 
 #auth-prompt {
-    color: white;
+  color: white;
+  position: absolute;
+  transition: all 0.3s;
+  top: -100%;
+  left: $spacing;
+  right: $spacing;
+  max-width: 400px;
+  background-color: $lightaccent;
+  border-radius: $spacing;
+  margin: auto;
+  z-index: 99999;
+  padding: $spacing 3 * $spacing;
+  box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.75);
+  .close-form-btn {
     position: absolute;
-    transition: all 0.3s;
-    top: -100%;
-    left: $spacing;
-    right: $spacing;
-    max-width: 400px;
-    background-color: $lightaccent;
+    top: $spacing;
+    right: 3 * $spacing;
+    transition: 0.2s;
     border-radius: $spacing;
-    margin: auto;
-    z-index: 99999;
-    padding: $spacing 3 * $spacing;
-    box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.75);
-    .close-form-btn {
-        position: absolute;
-        top: $spacing;
-        right: 3 * $spacing;
-        transition: 0.2s;
-        border-radius: $spacing;
-        padding: 4px 8px;
-        &:hover {
-            cursor: pointer;
-            background-color: $accent;
-        }
-        &:active {
-            background-color: $lightaccent;
-        }
+    padding: 4px 8px;
+    &:hover {
+      cursor: pointer;
+      background-color: $accent;
     }
-    h1 {
-        margin-top: 0;
+    &:active {
+      background-color: $lightaccent;
     }
+  }
+  h1 {
+    margin-top: 0;
+  }
 }
 
 button {
-    background-color: $lightaccent;
-    border-radius: 8px;
-    border: none;
-    color: white;
-    padding: 4px 8px;
-    transition: all 0.2s;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    &.btn-danger {
-        background-color: crimson;
-        &:hover {
-            background-color: darken(crimson, 10%);
-        }
-        &:active {
-            background-color: crimson;
-        }
-    }
-    &.btn-reverse {
-        background-color: $accent;
-        border: 2px solid $accent;
-        &:hover {
-            background-color: $lightaccent;
-        }
-        &:active {
-            background-color: $accent;
-        }
-    }
-    &.btn {
-        width: 100%;
-    }
+  background-color: $lightaccent;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  padding: 4px 8px;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  &.btn-danger {
+    background-color: crimson;
     &:hover {
-        background-color: $accent;
+      background-color: darken(crimson, 10%);
     }
     &:active {
-        background-color: $lightaccent;
+      background-color: crimson;
     }
+  }
+  &.btn-reverse {
+    background-color: $accent;
+    border: 2px solid $accent;
+    &:hover {
+      background-color: $lightaccent;
+    }
+    &:active {
+      background-color: $accent;
+    }
+  }
+  &.btn {
+    width: 100%;
+  }
+  &:hover {
+    background-color: $accent;
+  }
+  &:active {
+    background-color: $lightaccent;
+  }
 }
 
 .horizontal-line {
-    width: 100%;
-    border-top: 2px solid $grey;
-    &.space-top {
-        margin-top: 3 * $spacing;
-    }
-    &.space-bot {
-        margin-bottom: 3 * $spacing;
-    }
+  width: 100%;
+  border-top: 2px solid $grey;
+  &.space-top {
+    margin-top: 3 * $spacing;
+  }
+  &.space-bot {
+    margin-bottom: 3 * $spacing;
+  }
 }
 
 .space-top {
-    margin-top: $spacing;
+  margin-top: $spacing;
 }
 
 .column-form {
-    display: flex;
-    flex-direction: column;
-    margin-top: $spacing;
-    .form-group {
-        margin-bottom: $spacing;
-        width: 100%;
-    }
+  display: flex;
+  flex-direction: column;
+  margin-top: $spacing;
+  .form-group {
+    margin-bottom: $spacing;
+    width: 100%;
+  }
 }
 
 textarea,
 input {
-    border-radius: 8px;
-    max-width: 100%;
-    width: inherit;
-    resize: none;
-    padding: 4px;
-    border: none;
+  border-radius: 8px;
+  max-width: 100%;
+  width: inherit;
+  resize: none;
+  padding: 4px;
+  border: none;
 }
 button,
 textarea,
 input {
-    outline: none;
+  outline: none;
 }
 
 body {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 * {
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }

@@ -19,6 +19,46 @@
   overflow-y: scroll;
   background-color: #222629;
   color: white;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.container .ui.minimized {
+  padding: 10px 1px;
+  width: 5%;
+  min-width: 30px;
+}
+
+.container .ui.minimized * {
+  display: none;
+}
+
+.container .ui.minimized #delete-btn {
+  display: none !important;
+}
+
+.container .ui.minimized .toggler,
+.container .ui.minimized .bar {
+  display: block;
+}
+
+.container .ui .toggler {
+  float: right;
+}
+
+.container .ui .toggler .bar {
+  height: 4px;
+  background-color: white;
+  width: 28px;
+  margin-bottom: 3px;
+}
+
+.container .ui .toggler:hover {
+  cursor: pointer;
+}
+
+.container .ui.minimized + #cy {
+  width: 95%;
 }
 
 .container #cy {
@@ -40,6 +80,20 @@
   .container .ui {
     height: 40%;
     padding: 0 8px;
+  }
+  .container .ui.minimized {
+    height: 10%;
+    min-height: 26px;
+    width: 100%;
+  }
+  .container .ui.minimized + #cy {
+    height: 90%;
+    width: 100%;
+  }
+  .container .ui .toggler {
+    position: absolute;
+    top: 4px;
+    right: 8px;
   }
   .container #cy {
     height: 60%;
