@@ -107,6 +107,7 @@ export const startNewRoadmap = () => {
         style: styleArray,
         elements: {}
     });
+    unselectActive();
 };
 
 export const newCheckboxGoal = (number, name = "", checked = false) => {
@@ -116,6 +117,7 @@ export const newCheckboxGoal = (number, name = "", checked = false) => {
     checkBox.setAttribute("type", "checkbox");
     checkBox.setAttribute("id", id);
     checkBox.setAttribute("name", id);
+    checkBox.setAttribute("tabindex",-1);
     checkBox.checked = checked;
 
     const goalName = document.createElement("input");
@@ -127,6 +129,7 @@ export const newCheckboxGoal = (number, name = "", checked = false) => {
     const deleteGoal = document.createElement("button");
     deleteGoal.setAttribute("class", "remove-goal btn-flat");
     deleteGoal.setAttribute("data-goal-id", number);
+    deleteGoal.setAttribute("tabindex",-1);
     deleteGoal.appendChild(document.createTextNode("X"));
 
     const checkBoxDiv = document.createElement("div");
