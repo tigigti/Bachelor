@@ -1,12 +1,13 @@
 import cy, { layoutObject, styleArray } from "./cy";
 import {
-  addNode,
-  redraw,
-  updateActiveNode,
-  removeActive,
-  unselectActive,
-  deletedNodes,
-  startNewRoadmap
+    addNode,
+    redraw,
+    updateActiveNode,
+    removeActive,
+    unselectActive,
+    deletedNodes,
+    startNewRoadmap,
+    newCheckboxGoal
 } from "./functions";
 import { state } from "./index";
 
@@ -22,6 +23,10 @@ export const changeNodeNameInput = document.getElementById("change-node-name-inp
 export const changeNodeStartDate = document.getElementById("change-node-start-date");
 export const changeNodeEndDate = document.getElementById("change-node-end-date");
 export const changeNodeDesc = document.getElementById("change-node-description");
+
+// Goal Checkboxes
+const addCheckboxBtn = document.querySelector(".add-checkbox");
+const checkboxContainer = document.querySelector(".checkbox-container");
 
 // Bind Buttons
 export const deleteBtn = document.getElementById("delete-btn");
@@ -43,140 +48,156 @@ let testImports;
 
 // Add Node
 addNodeForm.addEventListener("submit", e => {
-  e.preventDefault();
-  const node = addNode(nodeNameInput.value);
-  state.setNode = node;
-  cy.filter().unselect();
-  cy.elements(node).select();
-  nodeNameInput.value = "";
-  submitNewNodeBtn.style.display = "none";
+    e.preventDefault();
+    const node = addNode(nodeNameInput.value);
+    state.setNode = node;
+    cy.filter().unselect();
+    cy.elements(node).select();
+    nodeNameInput.value = "";
+    submitNewNodeBtn.style.display = "none";
 });
 
 // Redraw Graph on Edge connection
 cy.edgehandles({
-  stop: sourceNode => {
-    redraw();
-    // Set node as active when it's handler is clicked
-    state.setNode = sourceNode;
-    cy.filter("node").unselect();
-    state.getNode.select();
-  },
-  hoverDelay: 50
+    stop: sourceNode => {
+        redraw();
+        // Set node as active when it's handler is clicked
+        state.setNode = sourceNode;
+        cy.filter("node").unselect();
+        state.getNode.select();
+    },
+    hoverDelay: 50
 });
 
 // Display add Node Button
 nodeNameInput.addEventListener("input", e => {
-  submitNewNodeBtn.style.display = e.target.value == "" ? "none" : "block";
+    submitNewNodeBtn.style.display = e.target.value == "" ? "none" : "block";
 });
 
 // Display node metadata on click
 cy.on("tap", e => {
-  if (typeof e.target.group == "undefined") {
-    return;
-  }
+    if (typeof e.target.group == "undefined") {
+        return;
+    }
 
-  // Don't display Edgehandle Metadata (is in nodes group)
-  if (e.target.classes()[0] == "eh-handle") {
-    return;
-  }
+    // Don't display Edgehandle Metadata (is in nodes group)
+    if (e.target.classes()[0] == "eh-handle") {
+        return;
+    }
 
-  if (e.target.group() == "nodes" || e.target.group() == "edges") {
-    state.setNode = e.target;
-  }
+    if (e.target.group() == "nodes" || e.target.group() == "edges") {
+        state.setNode = e.target;
+    }
 });
 
 // Change Meta Information
 changeMetaDataForm.addEventListener("submit", e => {
-  e.preventDefault();
-  updateActiveNode();
+    e.preventDefault();
+    updateActiveNode();
 });
 
 changeNodeStartDate.addEventListener("change", e => {
-  e.preventDefault();
-  updateActiveNode();
+    e.preventDefault();
+    updateActiveNode();
 });
 
 changeNodeEndDate.addEventListener("change", e => {
-  updateActiveNode();
+    updateActiveNode();
 });
 
 // Delete data
 deleteBtn.addEventListener("click", e => {
-  if (!state.getNode) {
-    return;
-  }
-  removeActive();
+    if (!state.getNode) {
+        return;
+    }
+    removeActive();
 });
 
 // Export the graph
 exportBtn.addEventListener("click", e => {
-  // Exports the elements as flat array to be imported at a later state
-  // Exclude the edgehandler from being exported as a node
-  const exportedEles = cy.elements().filter((ele, i, eles) => {
-    return ele.classes()[0] != "eh-handle";
-  });
-  console.log(exportedEles);
-  testImports = exportedEles.jsons();
+    // Exports the elements as flat array to be imported at a later state
+    // Exclude the edgehandler from being exported as a node
+    const exportedEles = cy.elements().filter((ele, i, eles) => {
+        return ele.classes()[0] != "eh-handle";
+    });
+    console.log(exportedEles);
+    testImports = exportedEles.jsons();
 });
 
 // Import elements into graph
 importBtn.addEventListener("click", e => {
-  cy.json({
-    layout: layoutObject,
-    style: styleArray,
-    elements: testImports
-  });
-  redraw();
-  unselectActive();
+    cy.json({
+        layout: layoutObject,
+        style: styleArray,
+        elements: testImports
+    });
+    redraw();
+    unselectActive();
 });
 
 // TODO: Add Buttons for mobile version
 document.onkeydown = e => {
-  // console.log(e.keyCode);
-  // Delete Element
-  if (e.ctrlKey && e.keyCode == 46) {
-    return removeActive();
-  }
+    // console.log(e.keyCode);
+    // Delete Element
+    if (e.ctrlKey && e.keyCode == 46) {
+        return removeActive();
+    }
 
-  // Unselect current element
-  if (/*e.ctrlKey && */ e.keyCode == 27) {
-    return unselectActive();
-  }
+    // Unselect current element
+    if (/*e.ctrlKey && */ e.keyCode == 27) {
+        return unselectActive();
+    }
 
-  // Revert latest deleted Element
-  if (e.ctrlKey && e.keyCode == 90 && deletedNodes.length > 0) {
-    // Restore latest removed Node
-    const restoredNode = deletedNodes.pop();
-    restoredNode.restore();
-    cy.elements(restoredNode).unselect();
-    redraw();
-    return;
-  }
+    // Revert latest deleted Element
+    if (e.ctrlKey && e.keyCode == 90 && deletedNodes.length > 0) {
+        // Restore latest removed Node
+        const restoredNode = deletedNodes.pop();
+        restoredNode.restore();
+        cy.elements(restoredNode).unselect();
+        redraw();
+        return;
+    }
 };
 
 // Start new Roadmap
 newRoadmapBtn.addEventListener("click", e => {
-  if (!window.confirm("Start a new Roadmap? Current one will be deleted!")) {
-    return;
-  }
-  startNewRoadmap();
+    if (!window.confirm("Start a new Roadmap? Current one will be deleted!")) {
+        return;
+    }
+    startNewRoadmap();
 });
 
 // Login
 loginBtn.addEventListener("click", e => {
-  console.log("login");
-  authPrompt.style.top = "10%";
-  document.querySelector("#cy").style.display = "none";
+    console.log("login");
+    authPrompt.style.top = "10%";
+    document.querySelector("#cy").style.display = "none";
 });
 
 // Close Prompt
 closeAuthPromptBtn.addEventListener("click", e => {
-  authPrompt.style.top = "-100%";
-  document.querySelector("#cy").style.display = "block";
+    authPrompt.style.top = "-100%";
+    document.querySelector("#cy").style.display = "block";
 });
 
 // Toggle sidebar
 uiToggler.addEventListener("click", e => {
-  UI.classList.toggle("minimized");
-  redraw();
+    UI.classList.toggle("minimized");
+    redraw();
+});
+
+// Add new checkbox goal
+addCheckboxBtn.addEventListener("click", e => {
+    const numberChecks = checkboxContainer.querySelectorAll("input").length;
+    const domElement = newCheckboxGoal(numberChecks + 1, "hey hey");
+    console.log(domElement);
+    checkboxContainer.appendChild(domElement);
+});
+
+// Remove checkbox goal from container
+checkboxContainer.addEventListener("click", e => {
+    if (e.target && e.target.classList.contains("remove-goal")) {
+        const goalId = e.target.dataset.goalId;
+        checkboxContainer.removeChild(document.querySelector("#"));
+    }
 });

@@ -153,6 +153,24 @@ button {
   letter-spacing: 0.15em;
 }
 
+button.btn-flat {
+  padding: 0 2px;
+  border-radius: 0;
+  letter-spacing: normal;
+  background-color: transparent;
+  color: #6b6e70;
+}
+
+button.btn-flat:hover {
+  background-color: transparent;
+  color: crimson;
+}
+
+button.btn-flat:active {
+  background-color: transparent;
+  color: #6b6e70;
+}
+
 button.btn-danger {
   background-color: crimson;
 }
@@ -163,6 +181,18 @@ button.btn-danger:hover {
 
 button.btn-danger:active {
   background-color: crimson;
+}
+
+button.btn-grey {
+  background-color: #6b6e70;
+}
+
+button.btn-grey:hover {
+  background-color: #525456;
+}
+
+button.btn-grey:active {
+  background-color: #6b6e70;
 }
 
 button.btn-reverse {
@@ -231,6 +261,11 @@ input {
   resize: none;
   padding: 4px;
   border: none;
+}
+
+textarea[type="checkbox"],
+input[type="checkbox"] {
+  width: auto;
 }
 
 button,
