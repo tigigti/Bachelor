@@ -115,7 +115,10 @@ export const elementsObject = {
                 endDate: "2020-01-07",
                 name: "get a degree",
                 desc: "desc",
-                goalsList: [{ id: 1, name: "get motivated", done: false }, { id: 2, name: "even more motivation", done: true }]
+                goalsList: [
+                    { id: 1, name: "get motivated", done: false },
+                    { id: 2, name: "even more motivation", done: true }
+                ]
             }
         },
 

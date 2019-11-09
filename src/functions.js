@@ -111,7 +111,7 @@ export const startNewRoadmap = () => {
 };
 
 /* 
-<div id="checkbox-row{number}" data-goal-id={number}>
+<div id="checkbox-row{number}" class="checkbox-row" data-goal-id={number}>
     <input type="checkbox" id={id} name={id} tabindex="-1" checked={checked}/>
     <input type="text" class="input-flat" placeholder="name..." value={name}/>
     <button class="remove-goal btn-flat" data-goal-id={number} tabindex="-1"/>
@@ -142,8 +142,9 @@ export const newCheckboxGoal = (number, name = "", checked = false) => {
     const checkBoxDiv = document.createElement("div");
     checkBoxDiv.setAttribute("id", `checkbox-row${number}`);
     checkBoxDiv.setAttribute("data-goal-id", number);
+    checkBoxDiv.classList.add("checkbox-row");
+
     checkBoxDiv.appendChild(checkBox);
-    // checkBoxDiv.appendChild(document.createTextNode(name));
     checkBoxDiv.appendChild(goalName);
     checkBoxDiv.appendChild(deleteGoal);
 
