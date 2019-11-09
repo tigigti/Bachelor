@@ -110,6 +110,13 @@ export const startNewRoadmap = () => {
     unselectActive();
 };
 
+/* 
+<div id="checkbox-row{number}" data-goal-id={number}>
+    <input type="checkbox" id={id} name={id} tabindex="-1" checked={checked}/>
+    <input type="text" class="input-flat" placeholder="name..." value={name}/>
+    <button class="remove-goal btn-flat" data-goal-id={number} tabindex="-1"/>
+</div>
+*/
 export const newCheckboxGoal = (number, name = "", checked = false) => {
     const id = `goal-checkbox${number}`;
 

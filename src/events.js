@@ -189,13 +189,11 @@ uiToggler.addEventListener("click", e => {
 // Add new checkbox goal
 addCheckboxBtn.addEventListener("click", e => {
     e.preventDefault();
-    if (checkboxContainer.children.length == 0) {
-        return checkboxContainer.appendChild(newCheckboxGoal(1));
-    }
-    const numberChecks = parseInt(checkboxContainer.lastElementChild.dataset.goalId);
+    const numberChecks = checkboxContainer.lastElementChild ? parseInt(checkboxContainer.lastElementChild.dataset.goalId) : 1;
     const domElement = newCheckboxGoal(numberChecks + 1);
     console.log(domElement);
     checkboxContainer.appendChild(domElement);
+    domElement.querySelector(".input-flat").focus();
 });
 
 // Remove checkbox goal from container
