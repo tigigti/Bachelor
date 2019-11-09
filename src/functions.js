@@ -174,7 +174,7 @@ export const createTodoList = () => {
 
         if (nodeData.goalsList) {
             for (let j = 0; j < nodeData.goalsList.length; j++) {
-                todos.push(nodeData.goalsList[j].name);
+                nodeData.goalsList[j].name != "" && todos.push(nodeData.goalsList[j].name);
             }
         }
     }
