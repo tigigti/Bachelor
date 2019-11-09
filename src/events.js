@@ -7,7 +7,9 @@ import {
     unselectActive,
     deletedNodes,
     startNewRoadmap,
-    newCheckboxGoal
+    newCheckboxGoal,
+    exportGraph,
+    createTodoList
 } from "./functions";
 import { state } from "./index";
 
@@ -43,6 +45,9 @@ const submitNewNodeBtn = document.querySelector("#add-node-form button");
 // Authentication Prompt
 const authPrompt = document.querySelector("#auth-prompt");
 const closeAuthPromptBtn = document.querySelector("#auth-prompt .close-form-btn");
+
+// Todo View
+const toggleTodoBtn = document.querySelector("#toggle-todo-btn");
 
 let testImports;
 
@@ -117,10 +122,9 @@ deleteBtn.addEventListener("click", e => {
 exportBtn.addEventListener("click", e => {
     // Exports the elements as flat array to be imported at a later state
     // Exclude the edgehandler from being exported as a node
-    const exportedEles = cy.elements().filter((ele, i, eles) => {
-        return ele.classes()[0] != "eh-handle";
-    });
-    console.log(exportedEles);
+    const exportedEles = exportGraph();
+    // console.log(exportedEles);
+    console.log(exportedEles.jsons());
     testImports = exportedEles.jsons();
 });
 
@@ -189,7 +193,9 @@ uiToggler.addEventListener("click", e => {
 // Add new checkbox goal
 addCheckboxBtn.addEventListener("click", e => {
     e.preventDefault();
-    const numberChecks = checkboxContainer.lastElementChild ? parseInt(checkboxContainer.lastElementChild.dataset.goalId) : 1;
+    const numberChecks = checkboxContainer.lastElementChild
+        ? parseInt(checkboxContainer.lastElementChild.dataset.goalId)
+        : 1;
     const domElement = newCheckboxGoal(numberChecks + 1);
     console.log(domElement);
     checkboxContainer.appendChild(domElement);
@@ -202,4 +208,10 @@ checkboxContainer.addEventListener("click", e => {
         const goalId = e.target.dataset.goalId;
         checkboxContainer.removeChild(document.querySelector(`#checkbox-row${goalId}`));
     }
+});
+
+// Toggle Todo View
+toggleTodoBtn.addEventListener("click", () => {
+    console.log("toggle todo view");
+    console.log(createTodoList());
 });

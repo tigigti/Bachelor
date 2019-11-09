@@ -124,7 +124,7 @@ export const newCheckboxGoal = (number, name = "", checked = false) => {
     checkBox.setAttribute("type", "checkbox");
     checkBox.setAttribute("id", id);
     checkBox.setAttribute("name", id);
-    checkBox.setAttribute("tabindex",-1);
+    checkBox.setAttribute("tabindex", -1);
     checkBox.checked = checked;
 
     const goalName = document.createElement("input");
@@ -136,7 +136,7 @@ export const newCheckboxGoal = (number, name = "", checked = false) => {
     const deleteGoal = document.createElement("button");
     deleteGoal.setAttribute("class", "remove-goal btn-flat");
     deleteGoal.setAttribute("data-goal-id", number);
-    deleteGoal.setAttribute("tabindex",-1);
+    deleteGoal.setAttribute("tabindex", -1);
     deleteGoal.appendChild(document.createTextNode("X"));
 
     const checkBoxDiv = document.createElement("div");
@@ -149,4 +149,34 @@ export const newCheckboxGoal = (number, name = "", checked = false) => {
     checkBoxDiv.appendChild(deleteGoal);
 
     return checkBoxDiv;
+};
+
+// Export Graph
+export const exportGraph = () => {
+    return cy.elements().filter((ele, i, eles) => {
+        return ele.classes()[0] != "eh-handle";
+    });
+};
+
+const exportNodes = () => {
+    return cy.elements().filter((ele, i, eles) => {
+        return ele.classes()[0] != "eh-handle" && ele.group() == "nodes";
+    });
+};
+
+// Create Todo List from Nodes
+export const createTodoList = () => {
+    const todos = [];
+    const allNodes = exportNodes().jsons();
+    for (let i = 0; i < allNodes.length; i++) {
+        const nodeData = allNodes[i].data;
+        todos.push(nodeData.name);
+
+        if (nodeData.goalsList) {
+            for (let j = 0; j < nodeData.goalsList.length; j++) {
+                todos.push(nodeData.goalsList[j].name);
+            }
+        }
+    }
+    return todos;
 };

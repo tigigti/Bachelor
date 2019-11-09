@@ -24,6 +24,7 @@ export const state = {
         changeMetaDataForm.style.display = "flex";
         deleteBtn.style.display = "block";
         renderMetaData();
+        // Update todo-view
     },
     get getNode() {
         return this.activeNode;
