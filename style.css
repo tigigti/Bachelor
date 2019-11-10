@@ -82,6 +82,8 @@
 .container .view-container #todo-view {
   display: none;
   height: 100%;
+  border-left: 2px solid #6b6e70;
+  padding-left: 8px;
 }
 
 .container .view-container.todo-visible #todo-view {

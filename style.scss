@@ -69,6 +69,8 @@ $spacing: 8px;
         #todo-view {
             display: none;
             height: 100%;
+            border-left: 2px solid $lightgrey;
+            padding-left: $spacing;
         }
         &.todo-visible {
             #todo-view {
@@ -105,7 +107,8 @@ $spacing: 8px;
     //     }
     // }
 
-    // Responsive styles TODO: vertical aligning for view-container
+    // Responsive styles
+    // TODO: vertical aligning for view-container
     @media screen and (max-width: 576px) {
         flex-direction: column-reverse;
         .ui,
