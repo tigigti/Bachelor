@@ -9,7 +9,7 @@ import {
     startNewRoadmap,
     newCheckboxGoal,
     exportGraph,
-    createTodoList
+    drawTodoList
 } from "./functions";
 import { state } from "./index";
 
@@ -19,6 +19,8 @@ export const changeMetaDataForm = document.getElementById("change-metadata-form"
 
 const uiToggler = document.querySelector(".ui .toggler");
 const UI = document.querySelector(".ui");
+
+const viewContainer = document.querySelector(".view-container");
 
 // Change Meta Data Form
 export const changeNodeNameInput = document.getElementById("change-node-name-input");
@@ -48,6 +50,7 @@ const closeAuthPromptBtn = document.querySelector("#auth-prompt .close-form-btn"
 
 // Todo View
 const toggleTodoBtn = document.querySelector("#toggle-todo-btn");
+export const todoView = document.querySelector("#todo-view");
 
 let testImports;
 
@@ -60,6 +63,7 @@ addNodeForm.addEventListener("submit", e => {
     cy.elements(node).select();
     nodeNameInput.value = "";
     submitNewNodeBtn.style.display = "none";
+    drawTodoList();
 });
 
 // Redraw Graph on Edge connection
@@ -175,13 +179,13 @@ newRoadmapBtn.addEventListener("click", e => {
 loginBtn.addEventListener("click", e => {
     console.log("login");
     authPrompt.style.top = "10%";
-    document.querySelector("#cy").style.display = "none";
+    viewContainer.style.display = "none";
 });
 
 // Close Prompt
 closeAuthPromptBtn.addEventListener("click", e => {
     authPrompt.style.top = "-100%";
-    document.querySelector("#cy").style.display = "block";
+    viewContainer.style.display = "flex";
 });
 
 // Toggle sidebar
@@ -213,5 +217,7 @@ checkboxContainer.addEventListener("click", e => {
 // Toggle Todo View
 toggleTodoBtn.addEventListener("click", () => {
     console.log("toggle todo view");
-    console.log(createTodoList());
+    drawTodoList();
+    viewContainer.classList.toggle("todo-visible");
+    redraw();
 });

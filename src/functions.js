@@ -5,7 +5,8 @@ import {
     changeNodeStartDate,
     changeNodeEndDate,
     changeNodeDesc,
-    checkboxContainer
+    checkboxContainer,
+    todoView
 } from "./events";
 
 export let deletedNodes = [];
@@ -81,6 +82,7 @@ export const updateActiveNode = () => {
 
     renderMetaData();
     redraw();
+    drawTodoList();
 };
 
 // delete the active node
@@ -92,6 +94,7 @@ export const removeActive = () => {
     redraw();
     deletedNodes.push(state.getNode);
     state.setNode = null;
+    drawTodoList();
 };
 
 // Reset Selection
@@ -165,7 +168,7 @@ const exportNodes = () => {
 };
 
 // Create Todo List from Nodes
-export const createTodoList = () => {
+const createTodoList = () => {
     const todos = [];
     const allNodes = exportNodes().jsons();
     for (let i = 0; i < allNodes.length; i++) {
@@ -174,9 +177,36 @@ export const createTodoList = () => {
 
         if (nodeData.goalsList) {
             for (let j = 0; j < nodeData.goalsList.length; j++) {
-                nodeData.goalsList[j].name != "" && todos.push(nodeData.goalsList[j].name);
+                nodeData.goalsList[j].name != "" && todos.push(nodeData.goalsList[j]);
             }
         }
     }
     return todos;
+};
+
+// Display Todos on DOM
+export const drawTodoList = () => {
+    const todos = createTodoList();
+    console.log(todos);
+    const ul = todoView.querySelector("ul");
+    ul.innerHTML = "";
+    for (let i = 0; i < todos.length; i++) {
+        const listElement = document.createElement("li");
+        if (typeof todos[i] == "string") {
+            listElement.appendChild(document.createTextNode(todos[i]));
+        }
+        if (typeof todos[i] == "object") {
+            if (todos[i].done) {
+                const crossedOut = document.createElement("s");
+                crossedOut.appendChild(document.createTextNode(todos[i].name));
+                listElement.appendChild(crossedOut);
+            } else {
+                listElement.appendChild(document.createTextNode(todos[i].name));
+            }
+        }
+        // typeof todos[i] == "string"
+        //     ? listElement.appendChild(document.createTextNode(todos[i]))
+        //     : listElement.appendChild(document.createTextNode(todos[i].name));
+        ul.appendChild(listElement);
+    }
 };

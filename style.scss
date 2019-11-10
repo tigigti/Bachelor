@@ -39,6 +39,9 @@ $spacing: 8px;
                 float: none;
                 margin: 0 auto;
             }
+            + .view-container {
+                width: 95%;
+            }
         }
         .toggler {
             float: right;
@@ -54,19 +57,59 @@ $spacing: 8px;
             }
         }
     }
-    .ui.minimized + #cy {
-        width: 95%;
-    }
-    #cy {
+    .view-container {
+        display: flex;
+        flex-direction: row;
         width: 75%;
-        height: 100%;
-    }
+        #cy {
+            width: 100%;
+            height: 100%;
+        }
 
-    // Responsive styles
+        #todo-view {
+            display: none;
+            height: 100%;
+        }
+        &.todo-visible {
+            #todo-view {
+                display: block;
+                width: 30%;
+            }
+            #cy {
+                width: 70%;
+            }
+        }
+    }
+    // .ui.minimized {
+    //     + #cy {
+    //         width: 95%;
+    //     }
+    //     ~ #todo-view.active {
+    //         background-color: pink;
+    //     }
+    // }
+    // #cy {
+    //     width: 70%;
+    //     height: 100%;
+    // }
+
+    // #todo-view {
+    //     display: none;
+    //     &.active {
+    //         display: block;
+    //         width: 30%;
+    //         height: 100%;
+    //         + #cy {
+    //             width: 45%;
+    //         }
+    //     }
+    // }
+
+    // Responsive styles TODO: vertical aligning for view-container
     @media screen and (max-width: 576px) {
         flex-direction: column-reverse;
         .ui,
-        #cy {
+        .view-container {
             width: 100%;
         }
         .ui {
@@ -76,7 +119,7 @@ $spacing: 8px;
                 height: 32px;
                 width: 100%;
                 overflow-y: auto;
-                + #cy {
+                + .view-container {
                     height: 90%;
                     width: 100%;
                 }
@@ -97,7 +140,7 @@ $spacing: 8px;
                 right: 8px;
             }
         }
-        #cy {
+        .view-container {
             height: 60%;
         }
     }
