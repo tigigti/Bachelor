@@ -5,6 +5,7 @@ import {
     changeNodeStartDate,
     changeNodeEndDate,
     changeNodeDesc,
+    goalCategorySelect,
     checkboxContainer,
     todoView
 } from "./events";
@@ -21,7 +22,15 @@ export const addNode = name => {
     const now = new Date().toISOString().slice(0, 10);
     const node = cy.add({
         group: "nodes",
-        data: { id: name, name: name, startDate: now, endDate: now, desc: "" }
+        data: {
+            id: name,
+            name: name,
+            startDate: now,
+            endDate: now,
+            desc: "",
+            goalsList: [],
+            category: state.lastCategory
+        }
     });
 
     redraw();
@@ -45,6 +54,7 @@ export const renderMetaData = () => {
     changeNodeStartDate.value = node.startDate;
     changeNodeEndDate.value = node.endDate;
     changeNodeDesc.value = node.desc;
+    goalCategorySelect.value = node.category ? node.category : "micro";
 
     checkboxContainer.innerHTML = "";
     if (!node.goalsList) {
@@ -55,6 +65,7 @@ export const renderMetaData = () => {
             newCheckboxGoal(node.goalsList[i].id, node.goalsList[i].name, node.goalsList[i].done)
         );
     }
+    console.log(node);
 
     // metaInformationContainer.innerHTML = metaData;
 };
@@ -65,6 +76,7 @@ export const updateActiveNode = () => {
     state.getNode.data("startDate", changeNodeStartDate.value);
     state.getNode.data("endDate", changeNodeEndDate.value);
     state.getNode.data("desc", changeNodeDesc.value);
+    state.getNode.data("category", goalCategorySelect.value);
 
     // Extract data from checkbox container
     let goalsList = [];
@@ -76,9 +88,10 @@ export const updateActiveNode = () => {
             done: goalElement.querySelector("input[type='checkbox']").checked
         });
     });
-    console.log(goalsList);
 
     state.getNode.data("goalsList", goalsList);
+
+    state.lastCategory = goalCategorySelect.value;
 
     renderMetaData();
     redraw();

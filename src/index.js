@@ -1,12 +1,13 @@
 // DOM Binding
 import "./events";
 import { changeMetaDataForm, deleteBtn, metaInformationContainer } from "./events";
-import { renderMetaData, drawTodoList } from "./functions";
+import { renderMetaData } from "./functions";
 
 // ======= State =======
 
 export const state = {
     activeNode: null,
+    lastCategory: "micro",
     activeNodeListener: value => {
         // Toggle display of meta information
         if (value == null) {

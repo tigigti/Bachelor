@@ -52,6 +52,9 @@ const closeAuthPromptBtn = document.querySelector("#auth-prompt .close-form-btn"
 const toggleTodoBtn = document.querySelector("#toggle-todo-btn");
 export const todoView = document.querySelector("#todo-view");
 
+// Goal category
+export const goalCategorySelect = document.querySelector("#goal-category");
+
 let testImports;
 
 // Add Node
@@ -199,7 +202,7 @@ addCheckboxBtn.addEventListener("click", e => {
     e.preventDefault();
     const numberChecks = checkboxContainer.lastElementChild
         ? parseInt(checkboxContainer.lastElementChild.dataset.goalId)
-        : 1;
+        : 0;
     const domElement = newCheckboxGoal(numberChecks + 1);
     console.log(domElement);
     checkboxContainer.appendChild(domElement);
@@ -220,4 +223,8 @@ toggleTodoBtn.addEventListener("click", () => {
     drawTodoList();
     viewContainer.classList.toggle("todo-visible");
     redraw();
+});
+
+goalCategorySelect.addEventListener("change", e => {
+    console.log(e.target.value);
 });

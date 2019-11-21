@@ -118,7 +118,8 @@ export const elementsObject = {
                 goalsList: [
                     { id: 1, name: "get motivated", done: false },
                     { id: 2, name: "even more motivation", done: true }
-                ]
+                ],
+                category: "micro"
             }
         },
 
@@ -128,10 +129,20 @@ export const elementsObject = {
                 name: "make your fam proud",
                 startDate: "2000-01-01",
                 endDate: "2021-10-31",
-                desc: "description"
+                desc: "description",
+                category: "meso"
             }
         },
-        { data: { id: "c", name: "c", startDate: "2000-01-01", endDate: "2021-10-31", desc: "Hola amigo" } },
+        {
+            data: {
+                id: "c",
+                name: "c",
+                startDate: "2000-01-01",
+                endDate: "2021-10-31",
+                desc: "Hola amigo",
+                category: "macro"
+            }
+        },
         { data: { id: "d", name: "d", startDate: "2000-01-01", endDate: "2021-10-31", desc: "Bogdaaan" } }
     ],
     edges: [

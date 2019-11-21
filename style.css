@@ -319,7 +319,8 @@ button:active {
 }
 
 textarea,
-input {
+input,
+select {
   border-radius: 8px;
   max-width: 100%;
   width: inherit;
@@ -329,12 +330,14 @@ input {
 }
 
 textarea[type="checkbox"],
-input[type="checkbox"] {
+input[type="checkbox"],
+select[type="checkbox"] {
   width: auto;
 }
 
 textarea[type="text"].input-flat,
-input[type="text"].input-flat {
+input[type="text"].input-flat,
+select[type="text"].input-flat {
   background-color: transparent;
   border-radius: 0;
   padding: 0;
@@ -343,7 +346,8 @@ input[type="text"].input-flat {
 
 button,
 textarea,
-input {
+input,
+select {
   outline: none;
 }
 

@@ -29,11 +29,21 @@
                 </form>
 
                 <form class="column-form" id="change-metadata-form" style="display: none">
+                    <!-- hidden submit button on top to ensure submit on enter functionality -->
                     <input type="submit" style="display: none" />
                     <div class="horizontal-line space-bot space-top"></div>
                     <div class="form-group">
                         <label for="change-node-name-input">Name</label>
                         <input id="change-node-name-input" type="text" name="change-node-name-input" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="goal-category">Category</label>
+                        <select id="goal-category">
+                            <option value="micro"">Micro</option>
+                            <option value="meso">Meso</option>
+                            <option value="macro">Macro</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
@@ -67,6 +77,8 @@
                         </div>
                         <button class="add-checkbox btn btn-grey">+ Add Task</button>
                     </div>
+                    
+        <div class="horizontal-line space-top space-bot"></div>
                     <button>Save</button>
                 </form>
 
