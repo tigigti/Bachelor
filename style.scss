@@ -183,6 +183,8 @@ $spacing: 8px;
     }
 }
 
+
+
 button {
     background-color: $lightaccent;
     border-radius: 8px;
@@ -280,6 +282,25 @@ button {
             flex: 1;
         }
         margin-bottom: 4px;
+    }
+}
+
+/* ======= Evaluation ======= */
+#eval-form-container {
+    position: absolute;
+    z-index: -999;
+    top: -100%;
+    left: 5%;
+    right: 5%;
+    bottom: 100%;
+    padding: $spacing;
+    background-color: pink;
+    transition: all .3s;
+
+    &.show {
+        top: 5%;
+        bottom: 5%;
+        z-index: 999;
     }
 }
 

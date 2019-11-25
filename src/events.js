@@ -55,6 +55,10 @@ export const todoView = document.querySelector("#todo-view");
 // Goal category
 export const goalCategorySelect = document.querySelector("#goal-category");
 
+// Evaluation
+const evalBtn = document.querySelector("#evaluate-btn");
+const evalFormContainer = document.querySelector("#eval-form-container");
+
 let testImports;
 
 // Add Node
@@ -228,3 +232,13 @@ toggleTodoBtn.addEventListener("click", () => {
 goalCategorySelect.addEventListener("change", e => {
     console.log(e.target.value);
 });
+
+evalBtn.addEventListener("click",e=>{
+    // evalFormContainer.classList.toggle("show");
+    console.log(evalFormContainer.style.display);
+        evalFormContainer.classList.toggle("show");
+
+
+
+        
+})

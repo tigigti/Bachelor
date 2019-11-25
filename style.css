@@ -318,6 +318,26 @@ button:active {
           flex: 1;
 }
 
+/* ======= Evaluation ======= */
+#eval-form-container {
+  position: absolute;
+  z-index: -999;
+  top: -100%;
+  left: 5%;
+  right: 5%;
+  bottom: 100%;
+  padding: 8px;
+  background-color: pink;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
+#eval-form-container.show {
+  top: 5%;
+  bottom: 5%;
+  z-index: 999;
+}
+
 textarea,
 input,
 select {
