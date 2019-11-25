@@ -1,7 +1,13 @@
 // DOM Binding
 import "./events";
-import { changeMetaDataForm, deleteBtn, metaInformationContainer } from "./events";
-import { renderMetaData } from "./functions";
+import {
+    changeMetaDataForm,
+    deleteBtn,
+    metaInformationContainer
+} from "./events";
+import {
+    renderMetaData
+} from "./functions";
 
 // ======= State =======
 

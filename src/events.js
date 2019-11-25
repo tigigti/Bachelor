@@ -12,7 +12,9 @@ import {
     startNewRoadmap,
     newCheckboxGoal,
     exportGraph,
-    drawTodoList
+    drawTodoList,
+    toggleEvalForm,
+    displayActiveSurvey
 } from "./functions";
 import {
     state
@@ -51,7 +53,7 @@ const submitNewNodeBtn = document.querySelector("#add-node-form button");
 
 // Authentication Prompt
 const authPrompt = document.querySelector("#auth-prompt");
-const closeAuthPromptBtn = document.querySelector("#auth-prompt .close-form-btn");
+const closeAuthPromptBtn = authPrompt.querySelector(".close-form-btn");
 
 // Todo View
 const toggleTodoBtn = document.querySelector("#toggle-todo-btn");
@@ -62,9 +64,14 @@ export const goalCategorySelect = document.querySelector("#goal-category");
 
 // Evaluation
 const evalBtn = document.querySelector("#evaluate-btn");
-const evalFormContainer = document.querySelector("#eval-form-container");
+export const evalFormContainer = document.querySelector("#eval-form-container");
+const closeEvalbtn = evalFormContainer.querySelector(".close-form-btn");
+export const evalSurveyWrapper = evalFormContainer.querySelector(".survey-wrapper");
+export const evalSurveyControls = evalFormContainer.querySelector(".survey-controls");
 
 let testImports;
+
+displayActiveSurvey();
 
 // Add Node
 addNodeForm.addEventListener("submit", e => {
@@ -234,22 +241,22 @@ toggleTodoBtn.addEventListener("click", () => {
     redraw();
 });
 
-goalCategorySelect.addEventListener("change", e => {
-    console.log(e.target.value);
+evalBtn.addEventListener("click", e => {
+    toggleEvalForm();
 });
 
-evalBtn.addEventListener("click", e => {
-    if (state.evaluateClickable == false) return;
+closeEvalbtn.addEventListener("click", e => {
+    toggleEvalForm();
+});
 
-    if (evalFormContainer.classList.contains("show")) {
-        state.evaluateClickable = false;
-        evalFormContainer.classList.remove("show");
-        setTimeout(() => {
-            evalFormContainer.style.zIndex = "-999";
-            state.evaluateClickable = true;
-        }, 300);
-        return;
+evalSurveyControls.addEventListener("click", e => {
+    if (e.target.classList.contains("prev")) {
+        evalSurveyWrapper.dataset.active = parseInt(evalSurveyWrapper.dataset.active - 1);
+        displayActiveSurvey();
     }
-    evalFormContainer.style.zIndex = "999";
-    evalFormContainer.classList.add("show");
+
+    if (e.target.classList.contains("next")) {
+        evalSurveyWrapper.dataset.active = parseInt(evalSurveyWrapper.dataset.active) + 1;
+        displayActiveSurvey();
+    }
 });

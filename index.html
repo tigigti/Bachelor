@@ -19,8 +19,7 @@
             </div>
             <h1>Headline</h1>
             <form id="add-node-form">
-                <input autocomplete="off" id="node-name-input" type="text" name="node-name" placeholder="New Goal"
-                    style="width: 100%;" />
+                <input autocomplete="off" id="node-name-input" type="text" name="node-name" placeholder="New Goal" style="width: 100%;" />
                 <button class="btn space-top" style="display: none">Add Goal</button>
             </form>
 
@@ -54,8 +53,7 @@
 
                 <div class="form-group">
                     <label for="change-node-description">Description</label>
-                    <textarea placeholder="Describe your goal..." id="change-node-description"
-                        name="change-node-description" rows="5"></textarea>
+                    <textarea placeholder="Describe your goal..." id="change-node-description" name="change-node-description" rows="5"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -116,8 +114,33 @@
         </div>
 
         <!-- Evaluation Form -->
-        <div id="eval-form-container">
-            <h1>Evaluation here</h1>
+        <div id="eval-form-container" class="show">
+            <div class="container-header">
+                <div class="close-form-btn">close</div>
+                <h1>Evaluation here</h1>
+            </div>
+
+            <!-- Survey Wrapper -->
+            <div class="survey-wrapper container-body" data-active="1">
+                <!-- Page 1 -->
+                <div id="survey-1">
+                    <p>Here are a few questions, answer them</p>
+                </div>
+
+                <!-- Page 2 -->
+                <div id="survey-2">
+                    <p>Here are more questions, answer god damn it!</p>
+                </div>
+
+                <!-- Page 3 -->
+                <div id="survey-3">
+                    <p>ANSWERS, I DEMAND THEM!!!</p>
+                </div>
+            </div>
+            <div class="survey-controls container-footer">
+                <button class="prev">Previous</button>
+                <button class="next">Next</button>
+            </div>
         </div>
     </div>
 

@@ -14,6 +14,7 @@ $spacing: 8px;
     flex-direction: row;
     position: relative;
     height: 100vh;
+
     .ui {
         padding: 10px 8px;
         width: 25%;
@@ -23,28 +24,35 @@ $spacing: 8px;
         background-color: $black;
         color: white;
         transition: all 0.2s;
+
         &.minimized {
             padding: 10px 1px;
             width: 40px;
             overflow-y: auto;
+
             * {
                 display: none;
             }
+
             #delete-btn {
                 display: none !important;
             }
+
             .toggler,
             .bar {
                 display: block;
                 float: none;
                 margin: 0 auto;
             }
-            + .view-container {
+
+            +.view-container {
                 width: 95%;
             }
         }
+
         .toggler {
             float: right;
+
             .bar {
                 height: 4px;
                 background-color: white;
@@ -57,10 +65,12 @@ $spacing: 8px;
             }
         }
     }
+
     .view-container {
         display: flex;
         flex-direction: row;
         width: 75%;
+
         #cy {
             width: 100%;
             height: 100%;
@@ -72,16 +82,19 @@ $spacing: 8px;
             border-left: 2px solid $lightgrey;
             padding-left: $spacing;
         }
+
         &.todo-visible {
             #todo-view {
                 display: block;
                 width: 30%;
             }
+
             #cy {
                 width: 70%;
             }
         }
     }
+
     // .ui.minimized {
     //     + #cy {
     //         width: 95%;
@@ -111,31 +124,38 @@ $spacing: 8px;
     // TODO: vertical aligning for view-container
     @media screen and (max-width: 576px) {
         flex-direction: column-reverse;
+
         .ui,
         .view-container {
             width: 100%;
         }
+
         .ui {
             height: 40%;
             padding: 0 8px;
+
             &.minimized {
                 height: 32px;
                 width: 100%;
                 overflow-y: auto;
-                + .view-container {
+
+                +.view-container {
                     height: 90%;
                     width: 100%;
                 }
+
                 .toggler {
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
+
                     .bar:last-child {
                         margin-bottom: 0;
                     }
                 }
             }
+
             .toggler {
                 position: absolute;
                 top: 4px;
@@ -143,6 +163,7 @@ $spacing: 8px;
                 right: 8px;
             }
         }
+
         .view-container {
             height: 60%;
         }
@@ -163,23 +184,29 @@ $spacing: 8px;
     z-index: 99999;
     padding: $spacing 3 * $spacing;
     box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.75);
-    .close-form-btn {
-        position: absolute;
-        top: $spacing;
-        right: 3 * $spacing;
-        transition: 0.2s;
-        border-radius: $spacing;
-        padding: 4px 8px;
-        &:hover {
-            cursor: pointer;
-            background-color: $accent;
-        }
-        &:active {
-            background-color: $lightaccent;
-        }
-    }
+
     h1 {
         margin-top: 0;
+    }
+}
+
+.close-form-btn {
+    position: absolute;
+    top: $spacing;
+    right: 3 * $spacing;
+    transition: 0.2s;
+    border-radius: $spacing;
+    padding: 4px 8px;
+    background-color: $lightaccent;
+    color: white;
+
+    &:hover {
+        cursor: pointer;
+        background-color: $accent;
+    }
+
+    &:active {
+        background-color: $lightaccent;
     }
 }
 
@@ -194,55 +221,70 @@ button {
     transition: all 0.2s;
     text-transform: uppercase;
     letter-spacing: 0.15em;
+
     &.btn-flat {
         padding: 0 2px;
         border-radius: 0;
         letter-spacing: normal;
         background-color: transparent;
         color: $lightgrey;
+
         &:hover {
             background-color: transparent;
             color: crimson;
         }
+
         &:active {
             background-color: transparent;
             color: $lightgrey;
         }
     }
+
     &.btn-danger {
         background-color: crimson;
+
         &:hover {
             background-color: darken(crimson, 10%);
         }
+
         &:active {
             background-color: crimson;
         }
     }
+
     &.btn-grey {
         background-color: $lightgrey;
+
         &:hover {
             background-color: darken($lightgrey, 10%);
         }
+
         &:active {
             background-color: $lightgrey;
         }
     }
+
     &.btn-reverse {
         background-color: $accent;
         border: 2px solid $accent;
+
         &:hover {
             background-color: $lightaccent;
         }
+
         &:active {
             background-color: $accent;
         }
     }
+
     &.btn {
         width: 100%;
     }
+
     &:hover {
         background-color: $accent;
     }
+
     &:active {
         background-color: $lightaccent;
     }
@@ -251,9 +293,11 @@ button {
 .horizontal-line {
     width: 100%;
     border-top: 2px solid $grey;
+
     &.space-top {
         margin-top: 3 * $spacing;
     }
+
     &.space-bot {
         margin-bottom: 3 * $spacing;
     }
@@ -267,6 +311,7 @@ button {
     display: flex;
     flex-direction: column;
     margin-top: $spacing;
+
     .form-group {
         margin-bottom: $spacing;
         width: 100%;
@@ -278,9 +323,11 @@ button {
     .checkbox-row {
         display: flex;
         justify-content: space-between;
+
         .input-flat {
             flex: 1;
         }
+
         margin-bottom: 4px;
     }
 }
@@ -290,19 +337,52 @@ button {
     position: absolute;
     z-index: -999;
     top: -100%;
-    left: 5%;
-    right: 5%;
-    bottom: 100%;
-    padding: $spacing;
-    background-color: pink;
+    left: 2%;
+    right: 2%;
+    bottom: 110%;
+    padding: $spacing $spacing*2;
+    background-color: white;
+    box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.75);
     transition: top .3s, bottom .3s;
+    border-radius: $spacing;
+
+    display: flex;
+    flex-direction: column;
+
+    .container-header,
+    .container-footer {
+        flex: 1;
+    }
+
+    .container-body {
+        flex: 4;
+    }
 
     &.show {
         top: 5%;
         bottom: 5%;
         z-index: 999;
     }
+
+    .survey-wrapper {
+        [id^=survey] {
+            display: none;
+
+            &.active {
+                display: block;
+            }
+        }
+    }
+
+    .survey-controls {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
 }
+
 
 textarea,
 input,
@@ -313,9 +393,11 @@ select {
     resize: none;
     padding: 4px;
     border: none;
+
     &[type="checkbox"] {
         width: auto;
     }
+
     &[type="text"].input-flat {
         background-color: transparent;
         border-radius: 0;
@@ -323,6 +405,7 @@ select {
         color: white;
     }
 }
+
 button,
 textarea,
 input,

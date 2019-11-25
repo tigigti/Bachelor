@@ -1,5 +1,10 @@
-import cy, { layoutObject, styleArray } from "./cy";
-import { state } from "./index";
+import cy, {
+    layoutObject,
+    styleArray
+} from "./cy";
+import {
+    state
+} from "./index";
 import {
     changeNodeNameInput,
     changeNodeStartDate,
@@ -7,7 +12,10 @@ import {
     changeNodeDesc,
     goalCategorySelect,
     checkboxContainer,
-    todoView
+    todoView,
+    evalFormContainer,
+    evalSurveyWrapper,
+    evalSurveyControls
 } from "./events";
 
 export let deletedNodes = [];
@@ -223,3 +231,43 @@ export const drawTodoList = () => {
         ul.appendChild(listElement);
     }
 };
+
+// Toggle Eval Form
+export const toggleEvalForm = () => {
+    if (state.evaluateClickable == false) return;
+
+    if (evalFormContainer.classList.contains("show")) {
+        state.evaluateClickable = false;
+        evalFormContainer.classList.remove("show");
+        // change z-index after transition of .3s
+        setTimeout(() => {
+            evalFormContainer.style.zIndex = "-999";
+            state.evaluateClickable = true;
+        }, 300);
+        return;
+    }
+
+    evalFormContainer.style.zIndex = "999";
+    evalFormContainer.classList.add("show");
+}
+
+// Handle Survey display
+export const displayActiveSurvey = (id = 1) => {
+    const activeId = evalSurveyWrapper.dataset.active || id;
+    const backBtn = evalSurveyControls.querySelector(".prev");
+    const nextBtn = evalSurveyControls.querySelector(".next");
+
+    const allSurveys = evalSurveyWrapper.querySelectorAll("[id^=survey]");
+
+    // Disable other questions
+    allSurveys.forEach(survey => {
+        survey.classList.remove("active");
+    });
+
+    evalSurveyWrapper.querySelector(`#survey-${activeId}`).classList.add("active");
+
+    allSurveys.length == activeId ? console.log("letzte seite") : console.log("noch nicht die letzte");
+
+    activeId == 1 ? backBtn.disabled = true : backBtn.disabled = false;
+    activeId == allSurveys.length ? nextBtn.disabled = true : nextBtn.disabled = false;
+}
