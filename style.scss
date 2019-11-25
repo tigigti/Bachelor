@@ -295,7 +295,7 @@ button {
     bottom: 100%;
     padding: $spacing;
     background-color: pink;
-    transition: all .3s;
+    transition: top .3s, bottom .3s;
 
     &.show {
         top: 5%;

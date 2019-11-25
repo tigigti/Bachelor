@@ -1,4 +1,7 @@
-import cy, { layoutObject, styleArray } from "./cy";
+import cy, {
+    layoutObject,
+    styleArray
+} from "./cy";
 import {
     addNode,
     redraw,
@@ -11,7 +14,9 @@ import {
     exportGraph,
     drawTodoList
 } from "./functions";
-import { state } from "./index";
+import {
+    state
+} from "./index";
 
 // Sidebar
 export const metaInformationContainer = document.getElementById("meta-information-container");
@@ -159,7 +164,7 @@ document.onkeydown = e => {
     }
 
     // Unselect current element
-    if (/*e.ctrlKey && */ e.keyCode == 27) {
+    if ( /*e.ctrlKey && */ e.keyCode == 27) {
         return unselectActive();
     }
 
@@ -204,9 +209,9 @@ uiToggler.addEventListener("click", e => {
 // Add new checkbox goal
 addCheckboxBtn.addEventListener("click", e => {
     e.preventDefault();
-    const numberChecks = checkboxContainer.lastElementChild
-        ? parseInt(checkboxContainer.lastElementChild.dataset.goalId)
-        : 0;
+    const numberChecks = checkboxContainer.lastElementChild ?
+        parseInt(checkboxContainer.lastElementChild.dataset.goalId) :
+        0;
     const domElement = newCheckboxGoal(numberChecks + 1);
     console.log(domElement);
     checkboxContainer.appendChild(domElement);
@@ -233,12 +238,18 @@ goalCategorySelect.addEventListener("change", e => {
     console.log(e.target.value);
 });
 
-evalBtn.addEventListener("click",e=>{
-    // evalFormContainer.classList.toggle("show");
-    console.log(evalFormContainer.style.display);
-        evalFormContainer.classList.toggle("show");
+evalBtn.addEventListener("click", e => {
+    if (state.evaluateClickable == false) return;
 
-
-
-        
-})
+    if (evalFormContainer.classList.contains("show")) {
+        state.evaluateClickable = false;
+        evalFormContainer.classList.remove("show");
+        setTimeout(() => {
+            evalFormContainer.style.zIndex = "-999";
+            state.evaluateClickable = true;
+        }, 300);
+        return;
+    }
+    evalFormContainer.style.zIndex = "999";
+    evalFormContainer.classList.add("show");
+});

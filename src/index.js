@@ -8,6 +8,7 @@ import { renderMetaData } from "./functions";
 export const state = {
     activeNode: null,
     lastCategory: "micro",
+    evaluateClickable: true,
     activeNodeListener: value => {
         // Toggle display of meta information
         if (value == null) {
