@@ -325,8 +325,8 @@ button:active {
   position: absolute;
   z-index: -999;
   top: -100%;
-  left: 2%;
-  right: 2%;
+  left: 8px;
+  right: 8px;
   bottom: 110%;
   padding: 8px 16px;
   background-color: white;
@@ -335,6 +335,8 @@ button:active {
   -webkit-transition: top .3s, bottom .3s;
   transition: top .3s, bottom .3s;
   border-radius: 8px;
+  max-width: 600px;
+  margin: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

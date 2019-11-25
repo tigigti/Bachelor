@@ -20,6 +20,10 @@ import {
     state
 } from "./index";
 
+import {
+    evalObject
+} from "./evaluation";
+
 // Sidebar
 export const metaInformationContainer = document.getElementById("meta-information-container");
 export const changeMetaDataForm = document.getElementById("change-metadata-form");
@@ -259,4 +263,29 @@ evalSurveyControls.addEventListener("click", e => {
         evalSurveyWrapper.dataset.active = parseInt(evalSurveyWrapper.dataset.active) + 1;
         displayActiveSurvey();
     }
+});
+
+// update eval object on input change
+document.querySelector("#survey-1").addEventListener("change", e => {
+    evalObject.micro[e.target.dataset.micro] = {
+        ...evalObject.micro[e.target.dataset.micro],
+        text: e.target.value
+    };
+    console.log(evalObject);
+});
+
+document.querySelector("#survey-2").addEventListener("change", e => {
+    evalObject.meso[e.target.dataset.meso] = {
+        ...evalObject.meso[e.target.dataset.meso],
+        text: e.target.value
+    }
+    console.log(evalObject);
+});
+
+document.querySelector("#survey-3").addEventListener("change", e => {
+    evalObject.macro[e.target.dataset.macro] = {
+        ...evalObject.macro[e.target.dataset.macro],
+        text: e.target.value
+    }
+    console.log(evalObject);
 });

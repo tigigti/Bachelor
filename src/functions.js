@@ -18,6 +18,10 @@ import {
     evalSurveyControls
 } from "./events";
 
+import {
+    evalObject
+} from "./evaluation";
+
 export let deletedNodes = [];
 
 export const redraw = () => {
@@ -271,3 +275,5 @@ export const displayActiveSurvey = (id = 1) => {
     activeId == 1 ? backBtn.disabled = true : backBtn.disabled = false;
     activeId == allSurveys.length ? nextBtn.disabled = true : nextBtn.disabled = false;
 }
+
+// Render rating questions on survey
