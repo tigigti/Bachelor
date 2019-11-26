@@ -14,508 +14,501 @@ $notepadred: #ec3221;
 $spacing: 8px;
 
 .container {
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    height: 100vh;
+	display: flex;
+	flex-direction: row;
+	position: relative;
+	height: 100vh;
 
-    .ui {
-        padding: 10px 8px;
-        width: 25%;
-        position: relative;
-        height: 100%;
-        overflow-y: auto;
-        background-color: $black;
-        color: white;
-        transition: all 0.2s;
+	.ui {
+		padding: 10px 8px;
+		width: 25%;
+		position: relative;
+		height: 100%;
+		overflow-y: auto;
+		background-color: $black;
+		color: white;
+		transition: all 0.2s;
 
-        &.minimized {
-            padding: 10px 1px;
-            width: 40px;
-            overflow-y: auto;
+		&.minimized {
+			padding: 10px 1px;
+			width: 40px;
+			overflow-y: auto;
 
-            * {
-                display: none;
-            }
+			* {
+				display: none;
+			}
 
-            #delete-btn {
-                display: none !important;
-            }
+			#delete-btn {
+				display: none !important;
+			}
 
-            .toggler,
-            .bar {
-                display: block;
-                float: none;
-                margin: 0 auto;
-            }
+			.toggler,
+			.bar {
+				display: block;
+				float: none;
+				margin: 0 auto;
+			}
 
-            +.view-container {
-                width: 95%;
-            }
-        }
+			+ .view-container {
+				width: 95%;
+			}
+		}
 
-        .toggler {
-            float: right;
+		.toggler {
+			float: right;
 
-            .bar {
-                height: 4px;
-                background-color: white;
-                width: 28px;
-                margin-bottom: 3px;
-            }
+			.bar {
+				height: 4px;
+				background-color: white;
+				width: 28px;
+				margin-bottom: 3px;
+			}
 
-            &:hover {
-                cursor: pointer;
-            }
-        }
-    }
+			&:hover {
+				cursor: pointer;
+			}
+		}
+	}
 
-    .view-container {
-        display: flex;
-        flex-direction: row;
-        width: 75%;
+	.view-container {
+		display: flex;
+		flex-direction: row;
+		width: 75%;
 
-        #cy {
-            width: 100%;
-            height: 100%;
-        }
+		#cy {
+			width: 100%;
+			height: 100%;
+		}
 
-        #todo-view {
-            display: none;
-            height: 100%;
-            border-left: 2px solid $lightgrey;
-            padding-left: $spacing;
-        }
+		#todo-view {
+			display: none;
+			height: 100%;
+			border-left: 2px solid $lightgrey;
+			padding-left: $spacing;
+		}
 
-        &.todo-visible {
-            #todo-view {
-                display: block;
-                width: 30%;
-            }
+		&.todo-visible {
+			#todo-view {
+				display: block;
+				width: 30%;
+			}
 
-            #cy {
-                width: 70%;
-            }
-        }
-    }
+			#cy {
+				width: 70%;
+			}
+		}
+	}
 
-    // .ui.minimized {
-    //     + #cy {
-    //         width: 95%;
-    //     }
-    //     ~ #todo-view.active {
-    //         background-color: pink;
-    //     }
-    // }
-    // #cy {
-    //     width: 70%;
-    //     height: 100%;
-    // }
+	// .ui.minimized {
+	//     + #cy {
+	//         width: 95%;
+	//     }
+	//     ~ #todo-view.active {
+	//         background-color: pink;
+	//     }
+	// }
+	// #cy {
+	//     width: 70%;
+	//     height: 100%;
+	// }
 
-    // #todo-view {
-    //     display: none;
-    //     &.active {
-    //         display: block;
-    //         width: 30%;
-    //         height: 100%;
-    //         + #cy {
-    //             width: 45%;
-    //         }
-    //     }
-    // }
+	// #todo-view {
+	//     display: none;
+	//     &.active {
+	//         display: block;
+	//         width: 30%;
+	//         height: 100%;
+	//         + #cy {
+	//             width: 45%;
+	//         }
+	//     }
+	// }
 
-    // Responsive styles
-    // TODO: vertical aligning for view-container
-    @media screen and (max-width: 576px) {
-        flex-direction: column-reverse;
+	// Responsive styles
+	// TODO: vertical aligning for view-container
+	@media screen and (max-width: 576px) {
+		flex-direction: column-reverse;
 
-        .ui,
-        .view-container {
-            width: 100%;
-        }
+		.ui,
+		.view-container {
+			width: 100%;
+		}
 
-        .ui {
-            height: 40%;
-            padding: 0 8px;
+		.ui {
+			height: 40%;
+			padding: 0 8px;
 
-            &.minimized {
-                height: 32px;
-                width: 100%;
-                overflow-y: auto;
+			&.minimized {
+				height: 32px;
+				width: 100%;
+				overflow-y: auto;
 
-                +.view-container {
-                    height: 90%;
-                    width: 100%;
-                }
+				+ .view-container {
+					height: 90%;
+					width: 100%;
+				}
 
-                .toggler {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
+				.toggler {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
 
-                    .bar:last-child {
-                        margin-bottom: 0;
-                    }
-                }
-            }
+					.bar:last-child {
+						margin-bottom: 0;
+					}
+				}
+			}
 
-            .toggler {
-                position: absolute;
-                top: 4px;
-                bottom: 4px;
-                right: 8px;
-            }
-        }
+			.toggler {
+				position: absolute;
+				top: 4px;
+				bottom: 4px;
+				right: 8px;
+			}
+		}
 
-        .view-container {
-            height: 60%;
-        }
-    }
+		.view-container {
+			height: 60%;
+		}
+	}
 
-    .container-veil {
-        display: none;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, .6);
-    }
+	.container-veil {
+		display: none;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0, 0, 0, .6);
+	}
 }
 
 #auth-prompt {
-    color: white;
-    position: absolute;
-    transition: all 0.3s;
-    top: -100%;
-    left: $spacing;
-    right: $spacing;
-    max-width: 400px;
-    background-color: $lightaccent;
-    border-radius: $spacing;
-    margin: auto;
-    z-index: 99999;
-    padding: $spacing 3 * $spacing;
-    box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.75);
+	color: white;
+	position: absolute;
+	transition: all 0.3s;
+	top: -100%;
+	left: $spacing;
+	right: $spacing;
+	max-width: 400px;
+	background-color: $lightaccent;
+	border-radius: $spacing;
+	margin: auto;
+	z-index: 99999;
+	padding: $spacing 3 * $spacing;
+	box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.75);
 
-    h1 {
-        margin-top: 0;
-    }
+	h1 {
+		margin-top: 0;
+	}
 }
 
 .close-form-btn {
-    position: absolute;
-    top: $spacing;
-    right: 3 * $spacing;
-    transition: 0.2s;
-    border-radius: $spacing;
-    padding: 4px 8px;
-    background-color: $lightaccent;
-    color: white;
+	position: absolute;
+	top: $spacing;
+	right: 3 * $spacing;
+	transition: 0.2s;
+	border-radius: $spacing;
+	padding: 4px 8px;
+	background-color: $lightaccent;
+	color: white;
 
-    &:hover {
-        cursor: pointer;
-        background-color: $accent;
-    }
+	&:hover {
+		cursor: pointer;
+		background-color: $accent;
+	}
 
-    &:active {
-        background-color: $lightaccent;
-    }
+	&:active {
+		background-color: $lightaccent;
+	}
 }
 
-
-
 button {
-    background-color: $lightaccent;
-    border-radius: 8px;
-    border: none;
-    color: white;
-    padding: 4px 8px;
-    transition: all 0.2s;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
+	background-color: $lightaccent;
+	border-radius: 8px;
+	border: none;
+	color: white;
+	padding: 4px 8px;
+	transition: all 0.2s;
+	text-transform: uppercase;
+	letter-spacing: 0.15em;
 
-    &.btn-flat {
-        padding: 0 2px;
-        border-radius: 0;
-        letter-spacing: normal;
-        background-color: transparent;
-        color: $lightgrey;
+	&.btn-flat {
+		padding: 0 2px;
+		border-radius: 0;
+		letter-spacing: normal;
+		background-color: transparent;
+		color: $lightgrey;
 
-        &:hover {
-            background-color: transparent;
-            color: crimson;
-        }
+		&:hover {
+			background-color: transparent;
+			color: crimson;
+		}
 
-        &:active {
-            background-color: transparent;
-            color: $lightgrey;
-        }
-    }
+		&:active {
+			background-color: transparent;
+			color: $lightgrey;
+		}
+	}
 
-    &.btn-danger {
-        background-color: crimson;
+	&.btn-danger {
+		background-color: crimson;
 
-        &:hover {
-            background-color: darken(crimson, 10%);
-        }
+		&:hover {
+			background-color: darken(crimson, 10%);
+		}
 
-        &:active {
-            background-color: crimson;
-        }
-    }
+		&:active {
+			background-color: crimson;
+		}
+	}
 
-    &.btn-grey {
-        background-color: $lightgrey;
+	&.btn-grey {
+		background-color: $lightgrey;
 
-        &:hover {
-            background-color: darken($lightgrey, 10%);
-        }
+		&:hover {
+			background-color: darken($lightgrey, 10%);
+		}
 
-        &:active {
-            background-color: $lightgrey;
-        }
-    }
+		&:active {
+			background-color: $lightgrey;
+		}
+	}
 
-    &.btn-reverse {
-        background-color: $accent;
-        border: 2px solid $accent;
+	&.btn-reverse {
+		background-color: $accent;
+		border: 2px solid $accent;
 
-        &:hover {
-            background-color: $lightaccent;
-        }
+		&:hover {
+			background-color: $lightaccent;
+		}
 
-        &:active {
-            background-color: $accent;
-        }
-    }
+		&:active {
+			background-color: $accent;
+		}
+	}
 
-    &.btn {
-        width: 100%;
-    }
+	&.btn {
+		width: 100%;
+	}
 
-    &:hover {
-        background-color: $accent;
-    }
+	&:hover {
+		background-color: $accent;
+	}
 
-    &:active {
-        background-color: $lightaccent;
-    }
+	&:active {
+		background-color: $lightaccent;
+	}
 
-    &:disabled {
-        background-color: $grey;
-    }
+	&:disabled {
+		background-color: $grey;
+	}
 }
 
 .horizontal-line {
-    width: 100%;
-    border-top: 2px solid $grey;
+	width: 100%;
+	border-top: 2px solid $grey;
 
-    &.space-top {
-        margin-top: 3 * $spacing;
-    }
+	&.space-top {
+		margin-top: 3 * $spacing;
+	}
 
-    &.space-bot {
-        margin-bottom: 3 * $spacing;
-    }
+	&.space-bot {
+		margin-bottom: 3 * $spacing;
+	}
 }
 
 .space-top {
-    margin-top: $spacing;
+	margin-top: $spacing;
 }
 
 .column-form {
-    display: flex;
-    flex-direction: column;
-    margin-top: $spacing;
+	display: flex;
+	flex-direction: column;
+	margin-top: $spacing;
 
-    .form-group {
-        margin-bottom: $spacing;
-        width: 100%;
-    }
+	.form-group {
+		margin-bottom: $spacing;
+		width: 100%;
+	}
 
-    &.white-background {
-        .form-group {
-            margin-bottom: 3*$spacing;
-        }
+	&.white-background {
+		.form-group {
+			margin-bottom: 3*$spacing;
+		}
 
-        input {
-            border-bottom: 1px solid $lightgrey;
-            padding: 4px 0;
-            transition: all .2s;
-            background-color: transparent;
-            border-radius: 0;
+		input {
+			border-bottom: 1px solid $lightgrey;
+			padding: 4px 0;
+			transition: all .2s;
+			background-color: transparent;
+			border-radius: 0;
 
-            &:focus {
-                border-bottom: 3px solid $grey;
-            }
-        }
-    }
-
+			&:focus {
+				border-bottom: 3px solid $grey;
+			}
+		}
+	}
 }
 
 /* ======= Checkbox Row ======= */
 .checkbox-container {
-    .checkbox-row {
-        display: flex;
-        justify-content: space-between;
+	.checkbox-row {
+		display: flex;
+		justify-content: space-between;
 
-        .input-flat {
-            flex: 1;
-        }
+		.input-flat {
+			flex: 1;
+		}
 
-        margin-bottom: 4px;
-    }
+		margin-bottom: 4px;
+	}
 }
 
 /* ======= Evaluation ======= */
 #eval-form-container {
-    position: absolute;
-    z-index: -999;
-    top: -100%;
-    left: $spacing;
-    right: $spacing;
-    bottom: 110%;
-    padding: $spacing $spacing*2;
-    background-color: white;
-    box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.75);
-    transition: top .3s, bottom .3s;
-    border-radius: $spacing;
-    max-width: 600px;
-    margin: auto;
-    background-color: $notepadyellow;
-    overflow-y: auto;
+	position: absolute;
+	z-index: -999;
+	top: -100%;
+	left: $spacing;
+	right: $spacing;
+	bottom: 110%;
+	padding: $spacing $spacing*2;
+	background-color: white;
+	box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.75);
+	transition: top .3s, bottom .3s;
+	border-radius: $spacing;
+	max-width: 600px;
+	margin: auto;
+	background-color: $notepadyellow;
+	overflow-y: auto;
 
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    .container-header {
-        background-color: $notepadheader;
-        margin: -8px -16px;
-        padding: 8px 16px;
-        box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.75);
+	.container-header {
+		background-color: $notepadheader;
+		margin: -8px -16px;
+		padding: 8px 16px;
+		box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.75);
 
-        h1 {
-            margin: 0;
-        }
-    }
+		h1 {
+			margin: 0;
+		}
+	}
 
-    .container-header,
-    .container-footer {
-        flex: 1;
-    }
+	.container-header,
+	.container-footer {
+		flex: 1;
+	}
 
-    .container-body {
-        flex: 4;
+	.container-body {
+		flex: 4;
 
-        * {
-            font-family: 'Coming Soon', cursive;
-        }
+		* {
+			font-family: 'Coming Soon', cursive;
+		}
 
-        input {
-            font-size: 16px;
-            font-weight: 600;
+		input {
+			font-size: 16px;
+			font-weight: 600;
 
-            &::placeholder {
-                color: lighten($lightgrey, 35%);
-            }
-        }
-    }
+			&::placeholder {
+				color: lighten($lightgrey, 35%);
+			}
+		}
+	}
 
+	.close-form-btn {
+		background-color: transparent;
+		color: black;
 
-    .close-form-btn {
-        background-color: transparent;
-        color: black;
+		&:hover {
+			background-color: $lightgrey;
+			color: white;
+		}
+	}
 
-        &:hover {
-            background-color: $lightgrey;
-            color: white;
-        }
+	button {
+		background-color: $notepadred;
+		z-index: 80;
 
-    }
+		&:hover,
+		&:active {
+			background-color: darken($notepadred, 15%);
+		}
 
+		&:disabled {
+			background-color: $grey;
+		}
+	}
 
-    button {
-        background-color: $notepadred;
-        z-index: 80;
+	&.show {
+		top: 5%;
+		bottom: 5%;
+		z-index: 999;
+	}
 
-        &:hover,
-        &:active {
-            background-color: darken($notepadred, 15%);
-        }
+	.survey-wrapper {
+		[id^=survey] {
+			display: none;
 
-        &:disabled {
-            background-color: $grey;
-        }
-    }
+			&.active {
+				display: block;
+			}
+		}
+	}
 
-    &.show {
-        top: 5%;
-        bottom: 5%;
-        z-index: 999;
-    }
-
-    .survey-wrapper {
-        [id^=survey] {
-            display: none;
-
-            &.active {
-                display: block;
-            }
-        }
-    }
-
-    .survey-controls {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        justify-content: space-between;
-        align-items: flex-end;
-    }
+	.survey-controls {
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+		justify-content: space-between;
+		align-items: flex-end;
+	}
 }
-
 
 textarea,
 input,
 select {
-    border-radius: 8px;
-    max-width: 100%;
-    width: inherit;
-    resize: none;
-    padding: 4px;
-    border: none;
+	border-radius: 8px;
+	max-width: 100%;
+	width: inherit;
+	resize: none;
+	padding: 4px;
+	border: none;
 
-    &[type="checkbox"] {
-        width: auto;
-    }
+	&[type="checkbox"] {
+		width: auto;
+	}
 
-    &[type="text"].input-flat {
-        background-color: transparent;
-        border-radius: 0;
-        padding: 0;
-        color: white;
-    }
+	&[type="text"].input-flat {
+		background-color: transparent;
+		border-radius: 0;
+		padding: 0;
+		color: white;
+	}
 }
 
 .subheading {
-    color: $grey;
-    font-style: italic;
+	color: $grey;
+	font-style: italic;
 }
 
 button,
 textarea,
 input,
 select {
-    outline: none;
+	outline: none;
 }
 
 body {
-    padding: 0;
-    margin: 0;
+	padding: 0;
+	margin: 0;
 }
 
 * {
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+	box-sizing: border-box;
+	font-family: "Poppins", sans-serif;
 }

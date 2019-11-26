@@ -1,7 +1,7 @@
 import cy, {
     layoutObject,
     styleArray
-} from "./cy";
+} from './cy';
 import {
     addNode,
     redraw,
@@ -16,131 +16,131 @@ import {
     toggleEvalForm,
     displayActiveSurvey,
     flipPage
-} from "./functions";
+} from './functions';
 import {
     state
-} from "./index";
+} from './index';
 
 import {
     evalObject
-} from "./evaluation";
+} from './evaluation';
 
 // Sidebar
-export const metaInformationContainer = document.getElementById("meta-information-container");
-export const changeMetaDataForm = document.getElementById("change-metadata-form");
+export const metaInformationContainer = document.getElementById('meta-information-container');
+export const changeMetaDataForm = document.getElementById('change-metadata-form');
 
-const uiToggler = document.querySelector(".ui .toggler");
-const UI = document.querySelector(".ui");
+const uiToggler = document.querySelector('.ui .toggler');
+const UI = document.querySelector('.ui');
 
-const viewContainer = document.querySelector(".view-container");
+const viewContainer = document.querySelector('.view-container');
 
 // Change Meta Data Form
-export const changeNodeNameInput = document.getElementById("change-node-name-input");
-export const changeNodeStartDate = document.getElementById("change-node-start-date");
-export const changeNodeEndDate = document.getElementById("change-node-end-date");
-export const changeNodeDesc = document.getElementById("change-node-description");
+export const changeNodeNameInput = document.getElementById('change-node-name-input');
+export const changeNodeStartDate = document.getElementById('change-node-start-date');
+export const changeNodeEndDate = document.getElementById('change-node-end-date');
+export const changeNodeDesc = document.getElementById('change-node-description');
 
 // Goal Checkboxes
-const addCheckboxBtn = document.querySelector(".add-checkbox");
-export const checkboxContainer = document.querySelector(".checkbox-container");
+const addCheckboxBtn = document.querySelector('.add-checkbox');
+export const checkboxContainer = document.querySelector('.checkbox-container');
 
 // Bind Buttons
-export const deleteBtn = document.getElementById("delete-btn");
-const exportBtn = document.getElementById("export-btn");
-const newRoadmapBtn = document.getElementById("new-roadmap-btn");
-const importBtn = document.getElementById("import-btn");
-const loginBtn = document.getElementById("login-btn");
+export const deleteBtn = document.getElementById('delete-btn');
+const exportBtn = document.getElementById('export-btn');
+const newRoadmapBtn = document.getElementById('new-roadmap-btn');
+const importBtn = document.getElementById('import-btn');
+const loginBtn = document.getElementById('login-btn');
 
 // New Node Form
-const addNodeForm = document.getElementById("add-node-form");
-const nodeNameInput = document.getElementById("node-name-input");
-const submitNewNodeBtn = document.querySelector("#add-node-form button");
+const addNodeForm = document.getElementById('add-node-form');
+const nodeNameInput = document.getElementById('node-name-input');
+const submitNewNodeBtn = document.querySelector('#add-node-form button');
 
 // Authentication Prompt
-const authPrompt = document.querySelector("#auth-prompt");
-const closeAuthPromptBtn = authPrompt.querySelector(".close-form-btn");
+const authPrompt = document.querySelector('#auth-prompt');
+const closeAuthPromptBtn = authPrompt.querySelector('.close-form-btn');
 
 // Todo View
-const toggleTodoBtn = document.querySelector("#toggle-todo-btn");
-export const todoView = document.querySelector("#todo-view");
+const toggleTodoBtn = document.querySelector('#toggle-todo-btn');
+export const todoView = document.querySelector('#todo-view');
 
 // Goal category
-export const goalCategorySelect = document.querySelector("#goal-category");
+export const goalCategorySelect = document.querySelector('#goal-category');
 
 // Evaluation
-const evalBtn = document.querySelector("#evaluate-btn");
-export const evalFormContainer = document.querySelector("#eval-form-container");
-const closeEvalbtn = evalFormContainer.querySelector(".close-form-btn");
-export const evalSurveyWrapper = evalFormContainer.querySelector(".survey-wrapper");
-export const evalSurveyControls = evalFormContainer.querySelector(".survey-controls");
-export const ratingsWrapper = evalSurveyWrapper.querySelector("#survey-4 .rating-container");
+const evalBtn = document.querySelector('#evaluate-btn');
+export const evalFormContainer = document.querySelector('#eval-form-container');
+const closeEvalbtn = evalFormContainer.querySelector('.close-form-btn');
+export const evalSurveyWrapper = evalFormContainer.querySelector('.survey-wrapper');
+export const evalSurveyControls = evalFormContainer.querySelector('.survey-controls');
+export const ratingsWrapper = evalSurveyWrapper.querySelector('#survey-4 .rating-container');
 
 let testImports;
 
 displayActiveSurvey();
 
 // Add Node
-addNodeForm.addEventListener("submit", e => {
+addNodeForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const node = addNode(nodeNameInput.value);
     state.setNode = node;
     cy.filter().unselect();
     cy.elements(node).select();
-    nodeNameInput.value = "";
-    submitNewNodeBtn.style.display = "none";
+    nodeNameInput.value = '';
+    submitNewNodeBtn.style.display = 'none';
     drawTodoList();
 });
 
 // Redraw Graph on Edge connection
 cy.edgehandles({
-    stop: sourceNode => {
+    stop: (sourceNode) => {
         redraw();
         // Set node as active when it's handler is clicked
         state.setNode = sourceNode;
-        cy.filter("node").unselect();
+        cy.filter('node').unselect();
         state.getNode.select();
     },
     hoverDelay: 50
 });
 
 // Display add Node Button
-nodeNameInput.addEventListener("input", e => {
-    submitNewNodeBtn.style.display = e.target.value == "" ? "none" : "block";
+nodeNameInput.addEventListener('input', (e) => {
+    submitNewNodeBtn.style.display = e.target.value == '' ? 'none' : 'block';
 });
 
 // Display node metadata on click
-cy.on("tap", e => {
-    if (typeof e.target.group == "undefined") {
+cy.on('tap', (e) => {
+    if (typeof e.target.group == 'undefined') {
         return;
     }
 
     // Don't display Edgehandle Metadata (is in nodes group)
-    if (e.target.classes()[0] == "eh-handle") {
+    if (e.target.classes()[0] == 'eh-handle') {
         return;
     }
 
-    if (e.target.group() == "nodes" || e.target.group() == "edges") {
+    if (e.target.group() == 'nodes' || e.target.group() == 'edges') {
         state.setNode = e.target;
     }
 });
 
 // Change Meta Information
-changeMetaDataForm.addEventListener("submit", e => {
+changeMetaDataForm.addEventListener('submit', (e) => {
     e.preventDefault();
     updateActiveNode();
 });
 
-changeNodeStartDate.addEventListener("change", e => {
+changeNodeStartDate.addEventListener('change', (e) => {
     e.preventDefault();
     updateActiveNode();
 });
 
-changeNodeEndDate.addEventListener("change", e => {
+changeNodeEndDate.addEventListener('change', (e) => {
     updateActiveNode();
 });
 
 // Delete data
-deleteBtn.addEventListener("click", e => {
+deleteBtn.addEventListener('click', (e) => {
     if (!state.getNode) {
         return;
     }
@@ -148,7 +148,7 @@ deleteBtn.addEventListener("click", e => {
 });
 
 // Export the graph
-exportBtn.addEventListener("click", e => {
+exportBtn.addEventListener('click', (e) => {
     // Exports the elements as flat array to be imported at a later state
     // Exclude the edgehandler from being exported as a node
     const exportedEles = exportGraph();
@@ -158,7 +158,7 @@ exportBtn.addEventListener("click", e => {
 });
 
 // Import elements into graph
-importBtn.addEventListener("click", e => {
+importBtn.addEventListener('click', (e) => {
     cy.json({
         layout: layoutObject,
         style: styleArray,
@@ -169,7 +169,7 @@ importBtn.addEventListener("click", e => {
 });
 
 // TODO: Add Buttons for mobile version
-document.onkeydown = e => {
+document.onkeydown = (e) => {
     // console.log(e.keyCode);
     // Delete Element
     if (e.ctrlKey && e.keyCode == 46) {
@@ -193,34 +193,34 @@ document.onkeydown = e => {
 };
 
 // Start new Roadmap
-newRoadmapBtn.addEventListener("click", e => {
-    if (!window.confirm("Start a new Roadmap? Current one will be deleted!")) {
+newRoadmapBtn.addEventListener('click', (e) => {
+    if (!window.confirm('Start a new Roadmap? Current one will be deleted!')) {
         return;
     }
     startNewRoadmap();
 });
 
 // Login
-loginBtn.addEventListener("click", e => {
-    console.log("login");
-    authPrompt.style.top = "10%";
-    viewContainer.style.display = "none";
+loginBtn.addEventListener('click', (e) => {
+    console.log('login');
+    authPrompt.style.top = '10%';
+    viewContainer.style.display = 'none';
 });
 
 // Close Prompt
-closeAuthPromptBtn.addEventListener("click", e => {
-    authPrompt.style.top = "-100%";
-    viewContainer.style.display = "flex";
+closeAuthPromptBtn.addEventListener('click', (e) => {
+    authPrompt.style.top = '-100%';
+    viewContainer.style.display = 'flex';
 });
 
 // Toggle sidebar
-uiToggler.addEventListener("click", e => {
-    UI.classList.toggle("minimized");
+uiToggler.addEventListener('click', (e) => {
+    UI.classList.toggle('minimized');
     redraw();
 });
 
 // Add new checkbox goal
-addCheckboxBtn.addEventListener("click", e => {
+addCheckboxBtn.addEventListener('click', (e) => {
     e.preventDefault();
     const numberChecks = checkboxContainer.lastElementChild ?
         parseInt(checkboxContainer.lastElementChild.dataset.goalId) :
@@ -228,41 +228,41 @@ addCheckboxBtn.addEventListener("click", e => {
     const domElement = newCheckboxGoal(numberChecks + 1);
     console.log(domElement);
     checkboxContainer.appendChild(domElement);
-    domElement.querySelector(".input-flat").focus();
+    domElement.querySelector('.input-flat').focus();
 });
 
 // Remove checkbox goal from container
-checkboxContainer.addEventListener("click", e => {
-    if (e.target && e.target.classList.contains("remove-goal")) {
+checkboxContainer.addEventListener('click', (e) => {
+    if (e.target && e.target.classList.contains('remove-goal')) {
         const goalId = e.target.dataset.goalId;
         checkboxContainer.removeChild(document.querySelector(`#checkbox-row${goalId}`));
     }
 });
 
 // Toggle Todo View
-toggleTodoBtn.addEventListener("click", () => {
-    console.log("toggle todo view");
+toggleTodoBtn.addEventListener('click', () => {
+    console.log('toggle todo view');
     drawTodoList();
-    viewContainer.classList.toggle("todo-visible");
+    viewContainer.classList.toggle('todo-visible');
     redraw();
 });
 
-evalBtn.addEventListener("click", e => {
+evalBtn.addEventListener('click', (e) => {
     toggleEvalForm();
 });
 
-closeEvalbtn.addEventListener("click", e => {
+closeEvalbtn.addEventListener('click', (e) => {
     toggleEvalForm();
 });
 
-evalSurveyControls.addEventListener("click", e => {
-    if (e.target.classList.contains("prev")) {
+evalSurveyControls.addEventListener('click', (e) => {
+    if (e.target.classList.contains('prev')) {
         evalSurveyWrapper.dataset.active = parseInt(evalSurveyWrapper.dataset.active - 1);
         displayActiveSurvey();
         flipPage();
     }
 
-    if (e.target.classList.contains("next")) {
+    if (e.target.classList.contains('next')) {
         evalSurveyWrapper.dataset.active = parseInt(evalSurveyWrapper.dataset.active) + 1;
         displayActiveSurvey();
         flipPage();
@@ -270,7 +270,7 @@ evalSurveyControls.addEventListener("click", e => {
 });
 
 // update eval object on input change
-document.querySelector("#survey-1").addEventListener("change", e => {
+document.querySelector('#survey-1').addEventListener('change', (e) => {
     evalObject.micro[e.target.dataset.micro] = {
         ...evalObject.micro[e.target.dataset.micro],
         text: e.target.value
@@ -278,18 +278,32 @@ document.querySelector("#survey-1").addEventListener("change", e => {
     console.log(evalObject);
 });
 
-document.querySelector("#survey-2").addEventListener("change", e => {
+document.querySelector('#survey-2').addEventListener('change', (e) => {
     evalObject.meso[e.target.dataset.meso] = {
         ...evalObject.meso[e.target.dataset.meso],
         text: e.target.value
-    }
+    };
     console.log(evalObject);
 });
 
-document.querySelector("#survey-3").addEventListener("change", e => {
+document.querySelector('#survey-3').addEventListener('change', (e) => {
     evalObject.macro[e.target.dataset.macro] = {
         ...evalObject.macro[e.target.dataset.macro],
         text: e.target.value
+    };
+    console.log(evalObject);
+});
+
+// Rating wrapper selectbox change event
+ratingsWrapper.addEventListener('change', (e) => {
+    const value = e.target.value;
+    const cat = e.target.dataset.category;
+    const goal = e.target.dataset.goalId;
+
+    evalObject[cat][goal] = {
+        ...evalObject[cat][goal],
+        rating: parseInt(value)
     }
+
     console.log(evalObject);
 });
