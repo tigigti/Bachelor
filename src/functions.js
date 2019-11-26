@@ -243,6 +243,7 @@ export const toggleEvalForm = () => {
     if (state.evaluateClickable == false) return;
 
     if (evalFormContainer.classList.contains("show")) {
+        document.querySelector(".container").style.opacity = 1;
         state.evaluateClickable = false;
         evalFormContainer.classList.remove("show");
         // change z-index after transition of .3s
@@ -255,6 +256,7 @@ export const toggleEvalForm = () => {
 
     evalFormContainer.style.zIndex = "999";
     evalFormContainer.classList.add("show");
+    document.querySelector(".container").style.opacity = .5;
 }
 
 // Handle Survey display

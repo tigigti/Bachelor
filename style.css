@@ -403,6 +403,22 @@ button:disabled {
   font-weight: 600;
 }
 
+#eval-form-container .container-body input::-webkit-input-placeholder {
+  color: #c5c7c8;
+}
+
+#eval-form-container .container-body input:-ms-input-placeholder {
+  color: #c5c7c8;
+}
+
+#eval-form-container .container-body input::-ms-input-placeholder {
+  color: #c5c7c8;
+}
+
+#eval-form-container .container-body input::placeholder {
+  color: #c5c7c8;
+}
+
 #eval-form-container .close-form-btn {
   background-color: transparent;
   color: black;
