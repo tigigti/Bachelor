@@ -148,6 +148,16 @@
   }
 }
 
+.container .container-veil {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
 #auth-prompt {
   color: white;
   position: absolute;
@@ -312,7 +322,7 @@ button:disabled {
 }
 
 .column-form.white-background input {
-  border-bottom: 1px solid #e0dfe4;
+  border-bottom: 1px solid #6b6e70;
   padding: 4px 0;
   -webkit-transition: all .2s;
   transition: all .2s;
@@ -321,7 +331,7 @@ button:disabled {
 }
 
 .column-form.white-background input:focus {
-  border-bottom: 3px solid #6b6e70;
+  border-bottom: 3px solid #474b4f;
 }
 
 /* ======= Checkbox Row ======= */

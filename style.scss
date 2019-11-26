@@ -172,6 +172,16 @@ $spacing: 8px;
             height: 60%;
         }
     }
+
+    .container-veil {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, .6);
+    }
 }
 
 #auth-prompt {
@@ -331,14 +341,14 @@ button {
         }
 
         input {
-            border-bottom: 1px solid $notepadheader;
+            border-bottom: 1px solid $lightgrey;
             padding: 4px 0;
             transition: all .2s;
             background-color: transparent;
             border-radius: 0;
 
             &:focus {
-                border-bottom: 3px solid $lightgrey;
+                border-bottom: 3px solid $grey;
             }
         }
     }
