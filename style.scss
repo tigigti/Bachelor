@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Poppins|Coming+Soon&display=swap");
 
 $black: #222629;
 $grey: #474b4f;
@@ -6,6 +6,10 @@ $lightgrey: #6b6e70;
 
 $accent: #61892f;
 $lightaccent: #86c232;
+
+$notepadyellow: #f7f098;
+$notepadheader: #e0dfe4;
+$notepadred: #ec3221;
 
 $spacing: 8px;
 
@@ -20,7 +24,7 @@ $spacing: 8px;
         width: 25%;
         position: relative;
         height: 100%;
-        overflow-y: scroll;
+        overflow-y: auto;
         background-color: $black;
         color: white;
         transition: all 0.2s;
@@ -288,6 +292,10 @@ button {
     &:active {
         background-color: $lightaccent;
     }
+
+    &:disabled {
+        background-color: $grey;
+    }
 }
 
 .horizontal-line {
@@ -316,6 +324,25 @@ button {
         margin-bottom: $spacing;
         width: 100%;
     }
+
+    &.white-background {
+        .form-group {
+            margin-bottom: 3*$spacing;
+        }
+
+        input {
+            border-bottom: 1px solid $notepadheader;
+            padding: 4px 0;
+            transition: all .2s;
+            background-color: transparent;
+            border-radius: 0;
+
+            &:focus {
+                border-bottom: 3px solid $lightgrey;
+            }
+        }
+    }
+
 }
 
 /* ======= Checkbox Row ======= */
@@ -347,9 +374,22 @@ button {
     border-radius: $spacing;
     max-width: 600px;
     margin: auto;
+    background-color: $notepadyellow;
+    overflow-y: auto;
 
     display: flex;
     flex-direction: column;
+
+    .container-header {
+        background-color: $notepadheader;
+        margin: -8px -16px;
+        padding: 8px 16px;
+        box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.75);
+
+        h1 {
+            margin: 0;
+        }
+    }
 
     .container-header,
     .container-footer {
@@ -358,6 +398,42 @@ button {
 
     .container-body {
         flex: 4;
+
+        * {
+            font-family: 'Coming Soon', cursive;
+        }
+
+        input {
+            font-size: 16px;
+            font-weight: 600;
+        }
+    }
+
+
+    .close-form-btn {
+        background-color: transparent;
+        color: black;
+
+        &:hover {
+            background-color: $lightgrey;
+            color: white;
+        }
+
+    }
+
+
+    button {
+        background-color: $notepadred;
+        z-index: 80;
+
+        &:hover,
+        &:active {
+            background-color: darken($notepadred, 15%);
+        }
+
+        &:disabled {
+            background-color: $grey;
+        }
     }
 
     &.show {
@@ -406,6 +482,11 @@ select {
         padding: 0;
         color: white;
     }
+}
+
+.subheading {
+    color: $grey;
+    font-style: italic;
 }
 
 button,

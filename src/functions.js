@@ -22,6 +22,8 @@ import {
     evalObject
 } from "./evaluation";
 
+const flipPageSound = new Audio("./dist/page-flip-01a.mp3");
+
 export let deletedNodes = [];
 
 export const redraw = () => {
@@ -277,3 +279,10 @@ export const displayActiveSurvey = (id = 1) => {
 }
 
 // Render rating questions on survey
+
+// Flip Page sound
+export const flipPage = () => {
+    flipPageSound.pause();
+    flipPageSound.currentTime = 0;
+    flipPageSound.play();
+}

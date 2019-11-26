@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Poppins|Coming+Soon&display=swap");
 .container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -16,7 +16,7 @@
   width: 25%;
   position: relative;
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
   background-color: #222629;
   color: white;
   -webkit-transition: all 0.2s;
@@ -270,6 +270,10 @@ button:active {
   background-color: #86c232;
 }
 
+button:disabled {
+  background-color: #474b4f;
+}
+
 .horizontal-line {
   width: 100%;
   border-top: 2px solid #474b4f;
@@ -301,6 +305,23 @@ button:active {
 .column-form .form-group {
   margin-bottom: 8px;
   width: 100%;
+}
+
+.column-form.white-background .form-group {
+  margin-bottom: 24px;
+}
+
+.column-form.white-background input {
+  border-bottom: 1px solid #e0dfe4;
+  padding: 4px 0;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+.column-form.white-background input:focus {
+  border-bottom: 3px solid #6b6e70;
 }
 
 /* ======= Checkbox Row ======= */
@@ -337,6 +358,8 @@ button:active {
   border-radius: 8px;
   max-width: 600px;
   margin: auto;
+  background-color: #f7f098;
+  overflow-y: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -344,6 +367,18 @@ button:active {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+#eval-form-container .container-header {
+  background-color: #e0dfe4;
+  margin: -8px -16px;
+  padding: 8px 16px;
+  -webkit-box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.75);
+          box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.75);
+}
+
+#eval-form-container .container-header h1 {
+  margin: 0;
 }
 
 #eval-form-container .container-header,
@@ -357,6 +392,38 @@ button:active {
   -webkit-box-flex: 4;
       -ms-flex: 4;
           flex: 4;
+}
+
+#eval-form-container .container-body * {
+  font-family: 'Coming Soon', cursive;
+}
+
+#eval-form-container .container-body input {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+#eval-form-container .close-form-btn {
+  background-color: transparent;
+  color: black;
+}
+
+#eval-form-container .close-form-btn:hover {
+  background-color: #6b6e70;
+  color: white;
+}
+
+#eval-form-container button {
+  background-color: #ec3221;
+  z-index: 80;
+}
+
+#eval-form-container button:hover, #eval-form-container button:active {
+  background-color: #b11d0f;
+}
+
+#eval-form-container button:disabled {
+  background-color: #474b4f;
 }
 
 #eval-form-container.show {
@@ -414,6 +481,11 @@ select[type="text"].input-flat {
   border-radius: 0;
   padding: 0;
   color: white;
+}
+
+.subheading {
+  color: #474b4f;
+  font-style: italic;
 }
 
 button,

@@ -14,7 +14,8 @@ import {
     exportGraph,
     drawTodoList,
     toggleEvalForm,
-    displayActiveSurvey
+    displayActiveSurvey,
+    flipPage
 } from "./functions";
 import {
     state
@@ -257,11 +258,13 @@ evalSurveyControls.addEventListener("click", e => {
     if (e.target.classList.contains("prev")) {
         evalSurveyWrapper.dataset.active = parseInt(evalSurveyWrapper.dataset.active - 1);
         displayActiveSurvey();
+        flipPage();
     }
 
     if (e.target.classList.contains("next")) {
         evalSurveyWrapper.dataset.active = parseInt(evalSurveyWrapper.dataset.active) + 1;
         displayActiveSurvey();
+        flipPage();
     }
 });
 
