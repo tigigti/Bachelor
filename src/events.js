@@ -73,6 +73,7 @@ export const evalFormContainer = document.querySelector("#eval-form-container");
 const closeEvalbtn = evalFormContainer.querySelector(".close-form-btn");
 export const evalSurveyWrapper = evalFormContainer.querySelector(".survey-wrapper");
 export const evalSurveyControls = evalFormContainer.querySelector(".survey-controls");
+export const ratingsWrapper = evalSurveyWrapper.querySelector("#survey-4 .rating-container");
 
 let testImports;
 

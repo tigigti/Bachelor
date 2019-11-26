@@ -15,7 +15,8 @@ import {
     todoView,
     evalFormContainer,
     evalSurveyWrapper,
-    evalSurveyControls
+    evalSurveyControls,
+    ratingsWrapper,
 } from "./events";
 
 import {
@@ -279,9 +280,52 @@ export const displayActiveSurvey = (id = 1) => {
 
     activeId == 1 ? backBtn.disabled = true : backBtn.disabled = false;
     activeId == allSurveys.length ? nextBtn.disabled = true : nextBtn.disabled = false;
+
+    // TODO: if survey-4 render the questions based on evalObject
+    if (activeId != 4) return;
+
+    renderRatingSurvey();
 }
 
 // Render rating questions on survey
+const renderRatingSurvey = () => {
+    // create dom elements form evalObject
+    const {
+        micro,
+        meso,
+        macro
+    } = evalObject;
+
+    let ratingElements = "";
+
+    [micro, meso, macro].forEach(category => {
+        for (let goal in category) {
+            const cg = category[goal];
+            if (goal != "id" && cg.text != "") {
+                // create DOM Element here
+                const options = [1, 2, 3, 4, 5].map(value => {
+                    const option =
+                        value == cg.rating ?
+                        `<option value="${value}" selected="selected">${value}</option>` :
+                        `<option value="${value}">${value}</option>`;
+                    return option;
+                }).join("");
+
+                const ratingEl = `
+                <div>
+                    <span>${cg.text}</span>
+                    <select>
+                        ${options}
+                    </select>
+                </div>`
+                ratingElements += ratingEl;
+            };
+        }
+    });
+
+    // Place created element in ratingWrapper
+    ratingsWrapper.innerHTML = ratingElements;
+}
 
 // Flip Page sound
 export const flipPage = () => {
