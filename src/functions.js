@@ -338,3 +338,13 @@ export const flipPage = () => {
     flipPageSound.currentTime = 0;
     flipPageSound.play();
 };
+
+// Flash Alert Message
+const alertContainer = document.querySelector(".alert-container");
+export const flashMessage = text => {
+    alertContainer.querySelector(".alert-messages").innerHTML = `<p>${text}</p>`;
+    alertContainer.style.display = "block";
+    setTimeout(() => {
+        alertContainer.style.display = "";
+    }, 4000);
+}

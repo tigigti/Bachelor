@@ -526,6 +526,28 @@ select {
     font-style: italic;
 }
 
+// Alert Message container
+.alert-container {
+    display: none;
+    position: fixed;
+    bottom: 5%;
+    width: 100%;
+    z-index: 99999999;
+
+    .alert-messages {
+        width: 100%;
+        max-width: 400px;
+        margin: auto;
+        background-color: $black;
+        padding: $spacing;
+        color: white;
+        border-left: 4px solid $lightaccent;
+        border-top-right-radius: $spacing;
+        border-bottom-right-radius: $spacing;
+    }
+}
+
+
 button,
 textarea,
 input,

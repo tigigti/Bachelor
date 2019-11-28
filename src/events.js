@@ -15,7 +15,8 @@ import {
     drawTodoList,
     toggleEvalForm,
     displayActiveSurvey,
-    flipPage
+    flipPage,
+    flashMessage
 } from './functions';
 import {
     state
@@ -139,6 +140,10 @@ changeNodeStartDate.addEventListener('change', (e) => {
 });
 
 changeNodeEndDate.addEventListener('change', (e) => {
+    updateActiveNode();
+});
+
+goalCategorySelect.addEventListener("change", e => {
     updateActiveNode();
 });
 
@@ -311,7 +316,6 @@ ratingsWrapper.addEventListener('change', (e) => {
     console.log(evalObject);
 });
 
-// TODO: Bind events to the 2 evaluation forms and submit in an async call
 document.querySelector("#evaluation-form").addEventListener("submit", e => {
     e.preventDefault();
     console.log("Form submitted");
@@ -337,11 +341,8 @@ document.querySelector("#evaluation-form").addEventListener("submit", e => {
         },
         mode: "cors",
         body: JSON.stringify(data)
-    }).then(res => res.json()).then(res => console.log(res.msg));
+    }).then(res => res.json()).then(res => flashMessage(res.msg));
 });
-
-// TODO: Submit the graph in the end
-// TODO: Show message on "Save" and "Submit"
 
 const labels = [
     "I think that i would like to use this system frequently",
@@ -384,7 +385,7 @@ document.querySelector("#sus-evaluation").addEventListener("submit", e => {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(data)
-    }).then(res => res.json()).then(res => console.log(res.msg));
+    }).then(res => res.json()).then(res => flashMessage(res.msg));
 });
 
 // Fill SUS evaluation
@@ -424,12 +425,8 @@ document.querySelector("#login-form").addEventListener("submit", e => {
         },
         body: JSON.stringify(data)
     }).then(res => res.json()).then(res => {
-        if (res.success) {
-            user.name = res.name;
-            user.secret = res.secret;
-            console.log(user);
-        } else {
-            console.log("show error message");
-        }
+        user.name = res.name;
+        user.secret = res.secret;
+        flashMessage(res.msg);
     });
 });

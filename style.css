@@ -548,6 +548,26 @@ select[type="text"].input-flat {
   font-style: italic;
 }
 
+.alert-container {
+  display: none;
+  position: fixed;
+  bottom: 5%;
+  width: 100%;
+  z-index: 99999999;
+}
+
+.alert-container .alert-messages {
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  background-color: #222629;
+  padding: 8px;
+  color: white;
+  border-left: 4px solid #86c232;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
 button,
 textarea,
 input,
