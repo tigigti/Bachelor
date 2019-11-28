@@ -309,13 +309,26 @@ ratingsWrapper.addEventListener('change', (e) => {
 });
 
 // TODO: Bind events to the 2 evaluation forms and submit in an async call
+document.querySelector("#evaluation-form").addEventListener("submit", e => {
+    e.preventDefault();
+    console.log("Form submitted");
+    // Collect values and export as object
+    const values = [];
+    document.querySelectorAll("#evaluation-form select,#evaluation-form textarea").forEach(input => {
+        values.push(input.value);
+    });
+    const results = {
+        clarifyConnection: values[0],
+        positives: values[1],
+        negatives: values[2]
+    }
+    console.log(results);
+});
+
 // TODO: Submit the graph in the end
 // TODO: Show message on "Save" and "Submit"
 
-// Fill SUS evaluation
-const susForm = document.querySelector("#sus-evaluation .question-container");
-
-const questions = [
+const labels = [
     "I think that i would like to use this system frequently",
     "I found the system unnecessarily complex",
     "I thought the system was easy to use",
@@ -326,7 +339,37 @@ const questions = [
     "I found the system very cumbersome to use",
     "I felt very confident using the system",
     "I neded to learn a lot of things before I could get going with this system"
-].map((question, index) => {
+];
+
+document.querySelector("#sus-evaluation").addEventListener("submit", e => {
+    e.preventDefault();
+    console.log("Submitted sus");
+    const values = [];
+    document.querySelectorAll("#sus-evaluation select").forEach(select => {
+        values.push(select.value);
+    });
+    const results = [];
+    for (let i = 0; i < 10; i++) {
+        results.push({
+            text: labels[i],
+            value: values[i]
+        });
+    }
+    // console.log(JSON.stringify(results));
+    fetch("api/index.php", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(results)
+    }).then(res => res.json()).then(res => console.log(res));
+});
+
+// Fill SUS evaluation
+const susForm = document.querySelector("#sus-evaluation .question-container");
+
+const questions = labels.map((question, index) => {
     const el = `
         <div class="form-group">
             <label>${index+1}. ${question}</label>
