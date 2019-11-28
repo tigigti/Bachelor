@@ -325,15 +325,19 @@ document.querySelector("#evaluation-form").addEventListener("submit", e => {
         positives: values[1],
         negatives: values[2]
     }
-    console.log(results);
-    fetch("api/index.php", {
+
+    const data = {
+        user,
+        results
+    }
+    fetch("api/eval.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         mode: "cors",
-        body: JSON.stringify(results)
-    });
+        body: JSON.stringify(data)
+    }).then(res => res.json()).then(res => console.log(res.msg));
 });
 
 // TODO: Submit the graph in the end
@@ -367,14 +371,20 @@ document.querySelector("#sus-evaluation").addEventListener("submit", e => {
         });
     }
     // console.log(JSON.stringify(results));
+    const data = {
+        results,
+        user,
+        graph: exportGraph().jsons(),
+        goals: evalObject
+    }
     fetch("api/sus.php", {
         method: "POST",
         mode: "cors",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(results)
-    }).then(res => res.json()).then(res => console.log(res));
+        body: JSON.stringify(data)
+    }).then(res => res.json()).then(res => console.log(res.msg));
 });
 
 // Fill SUS evaluation
