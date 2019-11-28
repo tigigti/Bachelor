@@ -17,7 +17,7 @@
                 <div class="bar"></div>
                 <div class="bar"></div>
             </div>
-            <h1>Headline</h1>
+            <h1>Roadmap</h1>
             <form id="add-node-form">
                 <input autocomplete="off" id="node-name-input" type="text" name="node-name" placeholder="New Goal" style="width: 100%;" />
                 <button class="btn space-top" style="display: none">Add Goal</button>
@@ -76,12 +76,12 @@
             <button id="delete-btn" class="btn btn-danger space-top" style="display: none;">Delete</button>
             <div class="horizontal-line space-top space-bot"></div>
             <button id="new-roadmap-btn" class="btn">New Roadmap</button>
-            <button id="login-btn" class="btn space-top">Login</button>
-            <button id="export-btn" class="btn space-top">Export</button>
-            <button id="import-btn" class="btn space-top">Import</button>
+            <button id="login-btn" class="btn space-top" style="display: none">Login</button>
+            <button id="export-btn" class="btn space-top" style="display: none">Export</button>
+            <button id="import-btn" class="btn space-top" style="display: none">Import</button>
             <button id="toggle-todo-btn" class="btn space-top">Toggle
                 Todo-View</button>
-            <button id="evaluate-btn" class="btn space-top">Evaluate</button>
+            <button id="evaluate-btn" class="btn space-top">Notepad</button>
             <!-- <label for="import-btn">Import</label> -->
             <!-- <input type="file" id="import-btn" name="import-btn" /> -->
             <div class="white-space" style="height: 20px">
@@ -112,18 +112,18 @@
                 <button class="btn btn-reverse">Submit</button>
             </form>
         </div>
-        <div class="container-veil" style="display: block"></div>
+        <div class="container-veil"></div>
     </div>
 
     <!-- Evaluation Form -->
-    <div id="eval-form-container" class="show">
+    <div id="eval-form-container">
         <div class="container-header">
             <div class="close-form-btn">close</div>
-            <h1>Evaluation here</h1>
+            <h1>Notepad</h1>
         </div>
 
         <!-- Survey Wrapper -->
-        <div class="survey-wrapper container-body" data-active="4">
+        <div class="survey-wrapper container-body" data-active="1">
             <!-- Page 1 -->
             <div id="survey-1" class="column-form white-background">
                 <h2>Micro Goals</h2>
@@ -205,13 +205,84 @@
                 <h2>Rating</h2>
                 <p>
                     Rate the goals of the previous task with a number form 1 to 5.
-                    In this rating 5 mean "very important" and 1 "not at all".
+                    In this rating 5 means "very important" and 1 "not at all".
                 </p>
                 <div class="rating-container"></div>
             </div>
 
+            <!-- Page 5 -->
+            <div id="survey-5">
+                <h2>Create your Roadmap</h2>
+                <p class>
+                    You can close the Notepad now and start structuring your goals with the Roadmap Editor.
+                    You can reopen the Notes on the previous Page as a reference.
+                </p>
+                <p>
+                    To add a goal, type in the input field where it says "New Goal".
+                    If you click on a goal, you can add metadata like a description or date. <strong>Click "Save" after configuring it.</strong>
+                    Connect the Goals by using the drag handler above the Nodes in the Graph.
+                </p>
+                <p>
+                    Connect the goals that build upon each other.
+                    If "graduating" is your meso goal and "getting a job" is a macro goal, connect "graduating" to "getting a job",
+                    because the one is necessary for the other (just an example, see which connections make sense to you).
+                </p>
+                <p>
+                    There are also smaller tasks for each goal you can configure.
+                    The "Toggle todo-view" displays every goal and every task in a list view.
+                </p>
+                <p class="subheading">
+                    Please evaluate the Application on the next Pages after you have used it to create your hierarchical goal structure.
+                </p>
+            </div>
+
+            <!-- Page 6 - Evaluation -->
+            <div id="survey-6">
+                <h2>Evaluation</h2>
+                <form class="column-form" id="evaluation-form">
+                    <div class="form-group">
+                        <label for="agreement">This stucture helps me to clarify the connection among micro, meso and macro goals.</label>
+                        <select name="agreement">
+                            <option value="1">Strongly disagree</option>
+                            <option value="2">Disagree</option>
+                            <option value="3">Slightly disagree</option>
+                            <option value="4" selected="selected">Neutral</option>
+                            <option value="5">Slightly agree</option>
+                            <option value="6">Agree</option>
+                            <option value="7">Strongly agree</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="positives">What I like about this structuring method: </label>
+                        <textarea rows="5" name="positives"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="negatives">
+                            What I don't like about this structuring method:
+                        </label>
+                        <textarea rows="5" name="negatives"></textarea>
+                    </div>
+                    <button type="submit" style="width: 80px; margin-bottom: 16px">Submit</button>
+                </form>
+            </div>
+
+            <!-- Page 7 - SUS Evaluation -->
+            <div id="survey-7">
+                <h2>SUS Evaluation</h2>
+                <p class="subheading">
+                    Thank you for participating, please take some time for feedback on the usability of the Application.
+                </p>
+                <form id="sus-evaluation" class="column-form">
+                    <div class="question-container">
+                    </div>
+                    <button type="submit" style="width: 80px; margin-bottom: 16px">Submit</button>
+                </form>
+            </div>
+
         </div>
-        <div class="survey-controls container-footer">
+        <div class=" survey-controls container-footer">
             <button class="prev">Previous</button>
             <button class="next">Next</button>
         </div>

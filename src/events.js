@@ -307,3 +307,39 @@ ratingsWrapper.addEventListener('change', (e) => {
 
     console.log(evalObject);
 });
+
+// TODO: Bind events to the 2 evaluation forms and submit in an async call
+// TODO: Submit the graph in the end
+// TODO: Show message on "Save" and "Submit"
+
+// Fill SUS evaluation
+const susForm = document.querySelector("#sus-evaluation .question-container");
+
+const questions = [
+    "I think that i would like to use this system frequently",
+    "I found the system unnecessarily complex",
+    "I thought the system was easy to use",
+    "I think that i would need the support of a technical person to be able to use this system",
+    "I found the various functions in this system were well integrated",
+    "I thought there was too much inconsistency in this system",
+    "I would imagine that most people would learn to use this system very quickly",
+    "I found the system very cumbersome to use",
+    "I felt very confident using the system",
+    "I neded to learn a lot of things before I could get going with this system"
+].map((question, index) => {
+    const el = `
+        <div class="form-group">
+            <label>${index+1}. ${question}</label>
+            <select>
+                <option value="1">Strongly disagree</option>
+                <option value="2">Disagree</option>
+                <option value="3" selected="selected">Neutral</option>
+                <option value="4">Agree</option>
+                <option value="5">Strongly agree</option>
+            </select>
+        </div>
+    `;
+    return el;
+}).join("");
+
+susForm.innerHTML = questions;

@@ -2,15 +2,15 @@ export const evalObject = {
 	micro: {
 		id: 'micro',
 		1: {
-			text: 'meet people',
+			text: '',
 			rating: 3
 		},
 		2: {
-			text: 'be cool',
+			text: '',
 			rating: 3
 		},
 		3: {
-			text: 'learn stuff',
+			text: '',
 			rating: 3
 		},
 		4: {
@@ -25,15 +25,15 @@ export const evalObject = {
 	meso: {
 		id: 'meso',
 		1: {
-			text: 'get a degree',
+			text: '',
 			rating: 3
 		},
 		2: {
-			text: 'be even cooler',
+			text: '',
 			rating: 3
 		},
 		3: {
-			text: 'yeah cool shit',
+			text: '',
 			rating: 3
 		},
 		4: {
@@ -48,7 +48,7 @@ export const evalObject = {
 	macro: {
 		id: 'macro',
 		1: {
-			text: 'oh hi marc',
+			text: '',
 			rating: 1
 		},
 		2: {

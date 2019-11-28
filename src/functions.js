@@ -281,7 +281,6 @@ export const displayActiveSurvey = (id = 1) => {
     activeId == 1 ? (backBtn.disabled = true) : (backBtn.disabled = false);
     activeId == allSurveys.length ? (nextBtn.disabled = true) : (nextBtn.disabled = false);
 
-    // TODO: if survey-4 render the questions based on evalObject
     if (activeId != 4) return;
 
     renderRatingSurvey();
@@ -299,6 +298,7 @@ const renderRatingSurvey = () => {
     let ratingElements = "";
 
     [micro, meso, macro].forEach(category => {
+        ratingElements += `<h4>${category.id}</h4>`
         for (let goal in category) {
             const cg = category[goal];
             if (goal != "id" && cg.text != "") {

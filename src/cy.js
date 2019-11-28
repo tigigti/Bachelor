@@ -17,8 +17,7 @@ export const layoutObject = {
     borderSpacing: 5
 };
 
-export const styleArray = [
-    {
+export const styleArray = [{
         selector: "node[name]",
         style: {
             label: "data(name)",
@@ -107,17 +106,23 @@ export const styleArray = [
 
 // TODO: Make a request in production App and import elements from DB
 export const elementsObject = {
-    nodes: [
-        {
+    nodes: [{
             data: {
                 id: "a",
                 startDate: "2000-11-27",
                 endDate: "2020-01-07",
                 name: "get a degree",
                 desc: "desc",
-                goalsList: [
-                    { id: 1, name: "get motivated", done: false },
-                    { id: 2, name: "even more motivation", done: true }
+                goalsList: [{
+                        id: 1,
+                        name: "get motivated",
+                        done: false
+                    },
+                    {
+                        id: 2,
+                        name: "even more motivation",
+                        done: true
+                    }
                 ],
                 category: "micro"
             }
@@ -143,21 +148,44 @@ export const elementsObject = {
                 category: "macro"
             }
         },
-        { data: { id: "d", name: "d", startDate: "2000-01-01", endDate: "2021-10-31", desc: "Bogdaaan" } }
-    ],
-    edges: [
         {
-            data: { id: "ab", source: "a", target: "b" }
+            data: {
+                id: "d",
+                name: "d",
+                startDate: "2000-01-01",
+                endDate: "2021-10-31",
+                desc: "Bogdaaan"
+            }
+        }
+    ],
+    edges: [{
+            data: {
+                id: "ab",
+                source: "a",
+                target: "b"
+            }
         },
-        { data: { id: "bc", source: "b", target: "c" } },
-        { data: { id: "ad", source: "d", target: "c" } }
+        {
+            data: {
+                id: "bc",
+                source: "b",
+                target: "c"
+            }
+        },
+        {
+            data: {
+                id: "ad",
+                source: "d",
+                target: "c"
+            }
+        }
     ]
 };
 
 const cy = cytoscape({
     container: document.getElementById("cy"),
 
-    elements: elementsObject,
+    // elements: elementsObject,
     layout: layoutObject,
     // userZoomingEnabled: false,
     // userPanningEnabled: false,
