@@ -76,7 +76,7 @@
             <button id="delete-btn" class="btn btn-danger space-top" style="display: none;">Delete</button>
             <div class="horizontal-line space-top space-bot"></div>
             <button id="new-roadmap-btn" class="btn">New Roadmap</button>
-            <button id="login-btn" class="btn space-top" style="display: none">Login</button>
+            <button id="login-btn" class="btn space-top">Login</button>
             <button id="export-btn" class="btn space-top" style="display: none">Export</button>
             <button id="import-btn" class="btn space-top" style="display: none">Import</button>
             <button id="toggle-todo-btn" class="btn space-top">Toggle
@@ -98,15 +98,15 @@
         <div id="auth-prompt">
             <h1>Login</h1>
             <div class="close-form-btn">close</div>
-            <form class="column-form">
+            <form id="login-form" class="column-form">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" name="username" />
+                    <input id="username" type="text" name="username" />
                 </div>
 
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" name="password" />
+                    <input id="password" type="password" name="password" />
                 </div>
 
                 <button class="btn btn-reverse">Submit</button>

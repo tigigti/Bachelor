@@ -75,7 +75,10 @@ export const evalSurveyWrapper = evalFormContainer.querySelector('.survey-wrappe
 export const evalSurveyControls = evalFormContainer.querySelector('.survey-controls');
 export const ratingsWrapper = evalSurveyWrapper.querySelector('#survey-4 .rating-container');
 
-let testImports;
+const user = {
+    name: "",
+    secret: ""
+}
 
 displayActiveSurvey();
 
@@ -323,6 +326,14 @@ document.querySelector("#evaluation-form").addEventListener("submit", e => {
         negatives: values[2]
     }
     console.log(results);
+    fetch("api/index.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        mode: "cors",
+        body: JSON.stringify(results)
+    });
 });
 
 // TODO: Submit the graph in the end
@@ -356,7 +367,7 @@ document.querySelector("#sus-evaluation").addEventListener("submit", e => {
         });
     }
     // console.log(JSON.stringify(results));
-    fetch("api/index.php", {
+    fetch("api/sus.php", {
         method: "POST",
         mode: "cors",
         headers: {
@@ -386,3 +397,29 @@ const questions = labels.map((question, index) => {
 }).join("");
 
 susForm.innerHTML = questions;
+
+// Login 
+document.querySelector("#login-form").addEventListener("submit", e => {
+    e.preventDefault();
+    const data = {
+        username: document.querySelector("#login-form #username").value,
+        password: document.querySelector("#login-form #password").value
+    }
+    console.log(data);
+    fetch("api/auth.php", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    }).then(res => res.json()).then(res => {
+        if (res.success) {
+            user.name = res.name;
+            user.secret = res.secret;
+            console.log(user);
+        } else {
+            console.log("show error message");
+        }
+    });
+});
