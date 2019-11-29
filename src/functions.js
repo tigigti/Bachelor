@@ -80,7 +80,6 @@ export const renderMetaData = () => {
             newCheckboxGoal(node.goalsList[i].id, node.goalsList[i].name, node.goalsList[i].done)
         );
     }
-    console.log(node);
 
     // metaInformationContainer.innerHTML = metaData;
 };
@@ -215,7 +214,6 @@ const createTodoList = () => {
 // Display Todos on DOM
 export const drawTodoList = () => {
     const todos = createTodoList();
-    console.log(todos);
     const ul = todoView.querySelector("ul");
     ul.innerHTML = "";
     for (let i = 0; i < todos.length; i++) {
@@ -276,7 +274,7 @@ export const displayActiveSurvey = (id = 1) => {
 
     evalSurveyWrapper.querySelector(`#survey-${activeId}`).classList.add("active");
 
-    allSurveys.length == activeId ? console.log("letzte seite") : console.log("noch nicht die letzte");
+    // allSurveys.length == activeId ? console.log("letzte seite") : console.log("noch nicht die letzte");
 
     activeId == 1 ? (backBtn.disabled = true) : (backBtn.disabled = false);
     activeId == allSurveys.length ? (nextBtn.disabled = true) : (nextBtn.disabled = false);
@@ -341,10 +339,17 @@ export const flipPage = () => {
 
 // Flash Alert Message
 const alertContainer = document.querySelector(".alert-container");
+let messageVisible = false;
 export const flashMessage = text => {
     alertContainer.querySelector(".alert-messages").innerHTML = `<p>${text}</p>`;
     alertContainer.style.display = "block";
+    if (messageVisible == true) {
+        return;
+    }
+
+    messageVisible = true;
     setTimeout(() => {
         alertContainer.style.display = "";
+        messageVisible = false;
     }, 4000);
 }

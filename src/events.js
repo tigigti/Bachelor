@@ -160,8 +160,6 @@ exportBtn.addEventListener('click', (e) => {
     // Exports the elements as flat array to be imported at a later state
     // Exclude the edgehandler from being exported as a node
     const exportedEles = exportGraph();
-    // console.log(exportedEles);
-    console.log(exportedEles.jsons());
     testImports = exportedEles.jsons();
 });
 
@@ -178,7 +176,6 @@ importBtn.addEventListener('click', (e) => {
 
 // TODO: Add Buttons for mobile version
 document.onkeydown = (e) => {
-    // console.log(e.keyCode);
     // Delete Element
     if (e.ctrlKey && e.keyCode == 46) {
         return removeActive();
@@ -210,7 +207,6 @@ newRoadmapBtn.addEventListener('click', (e) => {
 
 // Login
 loginBtn.addEventListener('click', (e) => {
-    console.log('login');
     authPrompt.style.top = '10%';
     viewContainer.style.display = 'none';
 });
@@ -234,7 +230,6 @@ addCheckboxBtn.addEventListener('click', (e) => {
         parseInt(checkboxContainer.lastElementChild.dataset.goalId) :
         0;
     const domElement = newCheckboxGoal(numberChecks + 1);
-    console.log(domElement);
     checkboxContainer.appendChild(domElement);
     domElement.querySelector('.input-flat').focus();
 });
@@ -249,7 +244,6 @@ checkboxContainer.addEventListener('click', (e) => {
 
 // Toggle Todo View
 toggleTodoBtn.addEventListener('click', () => {
-    console.log('toggle todo view');
     drawTodoList();
     viewContainer.classList.toggle('todo-visible');
     redraw();
@@ -283,7 +277,6 @@ document.querySelector('#survey-1').addEventListener('change', (e) => {
         ...evalObject.micro[e.target.dataset.micro],
         text: e.target.value
     };
-    console.log(evalObject);
 });
 
 document.querySelector('#survey-2').addEventListener('change', (e) => {
@@ -291,7 +284,6 @@ document.querySelector('#survey-2').addEventListener('change', (e) => {
         ...evalObject.meso[e.target.dataset.meso],
         text: e.target.value
     };
-    console.log(evalObject);
 });
 
 document.querySelector('#survey-3').addEventListener('change', (e) => {
@@ -299,7 +291,6 @@ document.querySelector('#survey-3').addEventListener('change', (e) => {
         ...evalObject.macro[e.target.dataset.macro],
         text: e.target.value
     };
-    console.log(evalObject);
 });
 
 // Rating wrapper selectbox change event
@@ -313,12 +304,10 @@ ratingsWrapper.addEventListener('change', (e) => {
         rating: parseInt(value)
     }
 
-    console.log(evalObject);
 });
 
 document.querySelector("#evaluation-form").addEventListener("submit", e => {
     e.preventDefault();
-    console.log("Form submitted");
     // Collect values and export as object
     const values = [];
     document.querySelectorAll("#evaluation-form select,#evaluation-form textarea").forEach(input => {
@@ -359,7 +348,6 @@ const labels = [
 
 document.querySelector("#sus-evaluation").addEventListener("submit", e => {
     e.preventDefault();
-    console.log("Submitted sus");
     const values = [];
     document.querySelectorAll("#sus-evaluation select").forEach(select => {
         values.push(select.value);
@@ -371,7 +359,6 @@ document.querySelector("#sus-evaluation").addEventListener("submit", e => {
             value: values[i]
         });
     }
-    // console.log(JSON.stringify(results));
     const data = {
         results,
         user,
@@ -416,7 +403,6 @@ document.querySelector("#login-form").addEventListener("submit", e => {
         username: document.querySelector("#login-form #username").value,
         password: document.querySelector("#login-form #password").value
     }
-    console.log(data);
     fetch("api/auth.php", {
         method: "POST",
         mode: "cors",
@@ -425,8 +411,13 @@ document.querySelector("#login-form").addEventListener("submit", e => {
         },
         body: JSON.stringify(data)
     }).then(res => res.json()).then(res => {
+        flashMessage(res.msg);
+        if (res.success == false) {
+            user.name = "";
+            user.secret = "";
+            return
+        }
         user.name = res.name;
         user.secret = res.secret;
-        flashMessage(res.msg);
     });
 });
