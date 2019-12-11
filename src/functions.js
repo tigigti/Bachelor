@@ -33,7 +33,7 @@ export const redraw = () => {
 };
 
 // Add new node
-export const addNode = name => {
+export const addNode = (name, cat = state.lastCategory, redraw = true) => {
     const now = new Date().toISOString().slice(0, 10);
     const node = cy.add({
         group: "nodes",
@@ -44,11 +44,13 @@ export const addNode = name => {
             endDate: now,
             desc: "",
             goalsList: [],
-            category: state.lastCategory
+            category: cat
         }
     });
 
-    redraw();
+    if(redraw){
+        redraw();
+    }
     return node;
 };
 
@@ -300,6 +302,9 @@ const renderRatingSurvey = () => {
         for (let goal in category) {
             const cg = category[goal];
             if (goal != "id" && cg.text != "") {
+
+                addNode(cg.text, category.id,false);
+                console.log(cg.text, category.id);
                 // create DOM Element here
                 const options = [1, 2, 3, 4, 5]
                     .map(value => {
@@ -326,6 +331,7 @@ const renderRatingSurvey = () => {
         }
     });
 
+    redraw();
     // Place created element in ratingWrapper
     ratingsWrapper.innerHTML = ratingElements;
 };
@@ -352,4 +358,8 @@ export const flashMessage = text => {
         alertContainer.style.display = "";
         messageVisible = false;
     }, 4000);
+}
+
+export const addFromNotes = () => {
+    console.log(evalObject);
 }
