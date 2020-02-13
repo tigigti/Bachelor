@@ -33,7 +33,7 @@ export const redraw = () => {
 };
 
 // Add new node
-export const addNode = (name, cat = state.lastCategory, redraw = true) => {
+export const addNode = (name, cat = state.lastCategory, doRedraw = true) => {
     const now = new Date().toISOString().slice(0, 10);
     const node = cy.add({
         group: "nodes",
@@ -48,7 +48,7 @@ export const addNode = (name, cat = state.lastCategory, redraw = true) => {
         }
     });
 
-    if(redraw){
+    if (doRedraw) {
         redraw();
     }
     return node;
@@ -303,7 +303,7 @@ const renderRatingSurvey = () => {
             const cg = category[goal];
             if (goal != "id" && cg.text != "") {
 
-                addNode(cg.text, category.id,false);
+                addNode(cg.text, category.id, false);
                 console.log(cg.text, category.id);
                 // create DOM Element here
                 const options = [1, 2, 3, 4, 5]
