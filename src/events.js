@@ -298,6 +298,7 @@ ratingsWrapper.addEventListener("change", e => {
 	};
 });
 
+// Non SUS Evaluation
 document.querySelector("#evaluation-form").addEventListener("submit", e => {
 	e.preventDefault();
 	// Collect values and export as object
@@ -327,6 +328,7 @@ document.querySelector("#evaluation-form").addEventListener("submit", e => {
 		.then(res => flashMessage(res.msg));
 });
 
+// SUS Evaluation
 const labels = [
 	"I think that i would like to use this system frequently",
 	"I found the system unnecessarily complex",
@@ -352,7 +354,7 @@ document.querySelector("#sus-evaluation").addEventListener("submit", e => {
 		values.push(select.value);
 	});
 	const results = [];
-	for (let i = 0; i < 10; i++) {
+	for (let i = 0; i < labels.length; i++) {
 		results.push({
 			text: labels[i],
 			value: values[i]
