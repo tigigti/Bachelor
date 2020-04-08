@@ -366,6 +366,7 @@ document.querySelector("#sus-evaluation").addEventListener("submit", e => {
 		graph: exportGraph().jsons(),
 		goals: evalObject
 	};
+	flashMessage("Sending...");
 	fetch("api/sus.php", {
 		method: "POST",
 		mode: "cors",
